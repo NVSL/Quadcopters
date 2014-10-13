@@ -1,0 +1,53 @@
+Useful Links:
+    - Surface Mount: http://en.wikipedia.org/wiki/Surface-mount_technology
+
+Microcontroller: ATMEGA128RFA1
+    - Suface Mount: QFA 64
+    - Through Hole: Not available :(
+	
+Capacitors:
+    - Power Transistor: 
+         - 10 uF Polarized 1206 (C14, C10)
+	 - 1 uF 0402 (C12, C3, C4)
+	 - .1 uF 0402 (C13)
+    - Antenna (uC pins to antenna)
+         - JUMP 0402 (C16, C17)
+	 - 22 pF 0402 (C11)
+	 - .75 pF 0402 (C9)
+    - uC AVDD/DVDD
+      	 - 1 uF 0402 (C2 , C1)
+    - uC XTAL
+         - 12 pF 0402 (C6, C5)
+    - uC TOSC
+         - 12 pF 0402 (C7, C8)
+    - Serial:
+	 -  0.1 uF 0402  (C15)
+   
+Resistors:
+    - Power Transistor: 
+         - 390 Ohm 0402 (R4)
+	 - 240 Ohm 0402 (R3)
+	 - 1K Ohm 0402 (R2)
+    - uC Reset
+         - 10K Ohm 0402 (R1)
+    - uC PB7/PB6
+      	 - 330 Ohm 0402 (R5,R6)
+
+LED: 
+     - PB6, PB7
+         - Green 0603 (LED2, LED3)
+     - Power
+         - Red 0603 (LED1)
+
+Crystal
+     - RTC
+         - 32.768 KHz SMD 
+     - CLK 
+         - 16 MHz SMD 
+
+Antenna:
+     - Main
+         - ANTENNA2SMD5
+
+Power Jack
+      - 
