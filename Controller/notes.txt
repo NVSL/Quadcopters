@@ -1,0 +1,47 @@
+Areas of interest:
+
+Priority to Power and Transciever.
+
+Power
+	Antenna (how do we create a high power signal?)
+	Microcontroller
+	Power Meter?
+	
+Transciever (how does it work)
+	    Can we receive?
+
+Joysticks
+	Which ones, how to do they operate?
+	How does the computer interface?
+	    FTDI, or serial?
+	    I2C?
+	    All?
+	    
+	
+Display (optional)
+	Breakout pins
+
+
+Questions
+    - How do we isolate the transmitter noise from the uC supply? 
+    - What is the meaning of a JUMP capacitor?
+    - Need Device footprints for crystals
+
+Notes from Week 1:
+    - Current Open Questions
+         - How does the Zigbee protocol operate? How are channels separated?
+	 - What voltage can the antenna operate at? Do we need an amplifier (probably)? Do we need impedance matching if we use an amplifier?
+	 - If we want to attach a separate controller, is it better to use serial, or USB? Bluetooth (there are 2 RX and 2 TX pins)
+
+This week I spent time building a bill of materials for the ATMEGA128RFA1 development board from sparkfun and understanding all of the parts of the board. At this point, the most complicated part of the controller seems to be the transmit & recieve functions. I think it would be fun to integrate a more powerful transmitter/antenna but this may require a more substantial power supply, an amplifier, and different analog electronics. I need to look into this more.
+
+Otherwise I have considered putting TWO antennas on the device, one standard antenna (like the current board) and another antenna pinout for long distance communication.
+
+For USB consider looking at the Arduino or other schematics.
+
+The unoccupied pinout may be for a lipo battery
+    
+
+Week 2
+
+The microcontroller has a battery monitor. We should use this
