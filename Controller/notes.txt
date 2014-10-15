@@ -45,3 +45,19 @@ The unoccupied pinout may be for a lipo battery
 Week 2
 
 The microcontroller has a battery monitor. We should use this
+
+Tuesday 10/14/2014
+Yesterday I found a decent RF front end for the RF/Antenna subsystem in the controller. I chose it partly because we can get free samples from TI, but also because it seemed to be the highest gain RF front end I could find for the 2.4Ghz frequency spectrum. 
+
+Today, I spent my time learning how to create a symbol and footprint in Eagle. Similar parts existed, but it seems that most of them did not match for some reason or another, or were completely wrong. When I finished the symbol (I still need to check the footprint) I started the schematic for my board. 
+
+For my board, I have chosen to provide interfaces for Serial (the programmer), I2C, and 8 analog pins (plus 1 AREF pin). All other non-necessary pins will be NC's. I chose these interfaces because they will allow users of my controller board to start with analog joysticks and work their way up to connecting Serial controllers, and finally I2C controllers.
+
+The main question I need to consider now is power. Single cell LIPO batteries only provide 3.75 volts when fully charged (and I don't know the low voltage). However, the LM1117 power transistor on the board requires at least a 4.8 V input. I either need to find a better power supply for 3.75 V, or find a different battery setup (9 volts would be sufficient)
+
+By the end of this week I want to have the first version of the schematic developed (with the CC2592 RF Front end checked) and start playing with microcontroller communication this weekend.
+
+
+
+
+
