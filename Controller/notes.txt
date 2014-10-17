@@ -82,4 +82,10 @@ DIG1 and DIG2 may also be interesting, as is the AMR pin.
 Thursday
 
 
+Today I spent all of my day doing two thing: confirming the CC2592 footprint (and learning how to do pads in Eagle) and getting as close as I could to finishing the controller PCB Schematic. The schematic got more complicated with the inclusion of an LCD that communicates via I2C (I chose the NHD‐C0220BiZ‐FSW‐FBW‐3V3M). In the Digikey order I also asked for two sets of 10 inductors. 
+
+I'm begining to worry that the rats nest will be too complicated for a two layer board. If this is the case, I don't know what to do (but It'll be exciting). 
+
+I pland to spend some time on the rats nest tonight, and then do software testing this weekend. 
+
 

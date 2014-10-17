@@ -5825,9 +5825,9 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <label x="137.16" y="-30.48" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="132.08" y1="17.78" x2="144.78" y2="17.78" width="0.1524" layer="91"/>
-<label x="144.78" y="17.78" size="1.27" layer="95" ratio="5" xref="yes"/>
-<pinref part="U2" gate="G$1" pin="PG0(DIG3)"/>
+<wire x1="132.08" y1="12.7" x2="144.78" y2="12.7" width="0.1524" layer="91"/>
+<label x="144.78" y="12.7" size="1.27" layer="95" ratio="5" xref="yes"/>
+<pinref part="U2" gate="G$1" pin="PG2(AMR)"/>
 </segment>
 </net>
 <net name="LNA_EN" class="0">
@@ -5849,9 +5849,9 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 <label x="137.16" y="-35.56" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="132.08" y1="12.7" x2="144.78" y2="12.7" width="0.1524" layer="91"/>
-<label x="144.78" y="12.7" size="1.27" layer="95" ratio="5" xref="yes"/>
-<pinref part="U2" gate="G$1" pin="PG2(AMR)"/>
+<pinref part="U2" gate="G$1" pin="PG0(DIG3)"/>
+<wire x1="132.08" y1="17.78" x2="142.24" y2="17.78" width="0.1524" layer="91"/>
+<label x="142.24" y="17.78" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$7" class="0">
