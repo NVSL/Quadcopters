@@ -61,3 +61,25 @@ By the end of this week I want to have the first version of the schematic develo
 
 
 
+Wednesday 10/15/2014
+
+Today I took a detour and looked at Joysticks, when I got Joystick examples from Steve. Through a moderate amount of mucking around I found that the PS3/Xbox-like joysticks cannot be modified to act like throttle gimbals. The spring in this device works in all directions, as opposed to having two springs operating in two directions. 
+
+However, I was sucessful when searching for RC controller parts, I so believe we can purchase joysticks like those available on an RC Controller.
+
+This leads back to the overall controller design. I'm imagining two parts to the controller, the physical part, with Joysticks, buttons and potentiometers, and the PCB part, which has a 2x13 connector for the board. The physical controller (with joysticks and stuff) will be made out of acrylic and connected with regular wire to the PCB interface. This will allow us to cheaply play around with different types of controllers, and still allow the flexibility I was hoping for, such as the ability to read from existing controllers.
+
+For now though, I see Ports D and E being used as digital inputs (16) and 6 pins from Port F being used as analog inputs for 22 total input pins. With 2 VDD and 2 Ground pins, we can use a 2x13 connector from sparkfun to create our board-controller interface.
+
+I also spent some time today creating the schematic, and I finished connecting the antenna subsystems, with jumpers included. I still need to check the pads for the RF front end and add the new 2x13 controller.
+
+Other notes:
+
+DIG3 and DIG4 look like the dedicated pins to control the enables on the RF Front end, however, they are also analog inputs?
+DIG1 and DIG2 may also be interesting, as is the AMR pin.
+
+
+Thursday
+
+
+
