@@ -1020,20 +1020,20 @@ void ACC_init () {
 // I2C adress: 0x32 (8bit)
 // ************************************************************************************************************
 #if defined(LSM303DLHC_ACC)
-#define LSM303DLHCAA  0x32 >> 1 // I2C adress
+#define LSM303DLHCAA  0x32 >> 1 // I2C accelerometer address 
 void ACC_init () {
-  i2c_writeReg(LSM303DLHCAA,0x20,0x57);  // CTRL_REG1_A   0100 0111  Pwr on, 50Hz
-//  i2c_writeReg(LSM303DLHCAA,0x21,0x00);  // CTRL_REG2_A   HP filter disable 
-//  i2c_writeReg(LSM303DLHCAA,0x23,0x30);  // CTRL_REG3_A   Little endian 16G FS
+  i2c_writeReg(LSM303DLHCAA,0x20,0x57);   // 100Hz data rate, XYZ enable
 }
 
   void ACC_getADC () {
   TWBR = ((F_CPU / 100000L) - 16) / 2;
   i2c_getSixRawADC(LSM303DLHCAA,0x28 | 0x80);
-//
- ACC_ORIENTATION( ((rawADC[1]<<8) | rawADC[0]) ,
-                  ((rawADC[3]<<8) | rawADC[2]) ,
-                  ((rawADC[5]<<8) | rawADC[4]) );
+
+ ACC_ORIENTATION( ((rawADC[1]<<8) | rawADC[0])>>4 ,
+                  ((rawADC[3]<<8) | rawADC[2])>>4 ,
+                  ((rawADC[5]<<8) | rawADC[4])>>4 );
+
+ // ACC_ORIENTATION(rawADC[0],rawADC[2],rawADC[4]);  
   // ACC_ORIENTATION(millis(),millis()<<1,millis()<<2);
   ACC_Common();
 }
