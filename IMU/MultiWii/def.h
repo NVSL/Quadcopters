@@ -1603,7 +1603,7 @@
   #define MAG 0
 #endif
 
-#if defined(ITG3200) || defined(L3G4200D) || defined(MPU6050) || defined(LSM330) || defined(MPU3050) || defined(WMP)
+#if defined(ITG3200) || defined(L3G4200D) || defined(MPU6050) || defined(LSM330) || defined(MPU3050) || defined(WMP) || defined(L3GD20)
   #define GYRO 1
 #else
   #define GYRO 0
@@ -1682,7 +1682,8 @@
 #define ACCZ_25deg   (int16_t)(ACC_1G * 0.90631) // 0.90631 = cos(25deg) (cos(theta) of accZ comparison)
 #define ACC_VelScale (9.80665f / 10000.0f / ACC_1G)
 
-#define GYRO_SCALE 4.3e-9f
+//GYRO_SCALE is in units of radians / microsecond
+//This is the angular velocity per digit
 #if defined(ITG3200)
   #define GYRO_SCALE (4 / 14.375 * PI / 180.0 / 1000000.0) //ITG3200   14.375 LSB/(deg/s) and we ignore the last 2 bits
 #endif
@@ -1700,6 +1701,9 @@
 #endif
 #if defined(WMP)
   #define GYRO_SCALE (1.0f/200e6f)
+#endif
+#if defined(L3GD20)
+  #define GYRO_SCALE ((70.0f * PI) / (180.0f * 1000000.0f * 1000.0f))
 #endif
 
 /**************************************************************************************/

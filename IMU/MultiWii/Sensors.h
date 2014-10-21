@@ -9,7 +9,7 @@ void ACC_getADC ();
 #endif
 
 #if defined(L3G4200D) || defined(ITG3200) || defined(MPU6050) || defined(LSM330) || \
-    defined(MPU3050) || defined(WMP) || defined(NUNCHUCK)
+    defined(MPU3050) || defined(WMP) || defined(NUNCHUCK) || defined(L3GD20)
 void Gyro_getADC ();
 #endif
 

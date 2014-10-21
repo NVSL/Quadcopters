@@ -165,6 +165,7 @@
 //      #define L3G4200D
       //#define MPU6050       //combo + ACC
       //#define LSM330        //combo + ACC
+       #define L3GD20
       
       /* I2C accelerometer */
       //#define NUNCHUCK  // if you want to use the nunckuk connected to a WMP
