@@ -118,7 +118,7 @@
 /***************             Proc specific definitions             ********************/
 /**************************************************************************************/
 // Proc auto detection
-#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__)
+#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega128RFA1__)
   #define PROMINI
 #endif
 #if defined(__AVR_ATmega32U4__) || defined(TEENSY20)
@@ -2098,3 +2098,4 @@
 #endif
 
 #endif /* DEF_H_ */
+
