@@ -89,3 +89,10 @@ I'm begining to worry that the rats nest will be too complicated for a two layer
 I pland to spend some time on the rats nest tonight, and then do software testing this weekend. 
 
 
+10/25/2014
+- Finalized 2592 Footprint
+- Created Gimbal footprint
+- Investigated Gimbal Pinout
+  From Top (Ridged Back, Left to Right), Black: GND, Red: Analog Out, White: VDD
+  Range is not VDD to 0, it's more like .2 VDD to .8VDD (Varies per gimbal)
+Friday/Weekenda
