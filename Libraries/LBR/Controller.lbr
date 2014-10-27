@@ -4260,18 +4260,18 @@ Datasheet: http://www.newhavendisplay.com/specs/NHD-C0220BiZ-FSW-FBW-3V3M.pdf
 
 Author: Dustin Richmond
 Created: 10/25/2014</description>
-<pad name="P$1" x="-7" y="0" drill="0.7" shape="square" first="yes"/>
-<pad name="P$2" x="-5" y="0" drill="0.7"/>
-<pad name="P$3" x="-3" y="0" drill="0.7"/>
-<pad name="P$4" x="-1" y="0" drill="0.7"/>
-<pad name="P$5" x="1" y="0" drill="0.7"/>
-<pad name="P$6" x="3" y="0" drill="0.7"/>
-<pad name="P$7" x="5" y="0" drill="0.7"/>
-<pad name="P$8" x="7" y="0" drill="0.7"/>
-<wire x1="-8" y1="1" x2="8" y2="1" width="0.127" layer="21"/>
-<wire x1="8" y1="1" x2="8" y2="-1" width="0.127" layer="21"/>
+<pad name="P$1" x="7" y="0" drill="0.7" shape="square" rot="R180" first="yes"/>
+<pad name="P$2" x="5" y="0" drill="0.7" rot="R180"/>
+<pad name="P$3" x="3" y="0" drill="0.7" rot="R180"/>
+<pad name="P$4" x="1" y="0" drill="0.7" rot="R270"/>
+<pad name="P$5" x="-1" y="0" drill="0.7" rot="R270"/>
+<pad name="P$6" x="-3" y="0" drill="0.7" rot="R180"/>
+<pad name="P$7" x="-5" y="0" drill="0.7" rot="R180"/>
+<pad name="P$8" x="-7" y="0" drill="0.7" rot="R180"/>
 <wire x1="8" y1="-1" x2="-8" y2="-1" width="0.127" layer="21"/>
 <wire x1="-8" y1="-1" x2="-8" y2="1" width="0.127" layer="21"/>
+<wire x1="-8" y1="1" x2="8" y2="1" width="0.127" layer="21"/>
+<wire x1="8" y1="1" x2="8" y2="-1" width="0.127" layer="21"/>
 <pad name="P$9" x="-38.55" y="21.05" drill="1.6"/>
 <pad name="P$10" x="-38.55" y="12.55" drill="1.6"/>
 <wire x1="-39.9" y1="-5.25" x2="35.8" y2="-5.25" width="0.127" layer="21"/>
