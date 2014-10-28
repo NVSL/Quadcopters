@@ -130,6 +130,28 @@
 <text x="-7.112" y="21.082" size="1.778" layer="95">&gt;Name</text>
 <text x="-7.112" y="-15.24" size="1.778" layer="96">&gt;Value</text>
 </symbol>
+<symbol name="LSM303D">
+<wire x1="-9" y1="-12" x2="11" y2="-12" width="0.254" layer="94"/>
+<wire x1="11" y1="-12" x2="11" y2="21" width="0.254" layer="94"/>
+<wire x1="11" y1="21" x2="-9" y2="21" width="0.254" layer="94"/>
+<wire x1="-9" y1="21" x2="-9" y2="-12" width="0.254" layer="94"/>
+<pin name="VDD_IO" x="-14" y="19" length="middle"/>
+<pin name="SETC" x="-14" y="14" length="middle"/>
+<pin name="SETP" x="-14" y="11" length="middle"/>
+<pin name="C1" x="-14" y="6" length="middle"/>
+<pin name="RSRVD" x="-14" y="1" length="middle"/>
+<pin name="GND2" x="-14" y="-5" length="middle"/>
+<pin name="GND1" x="-14" y="-8" length="middle"/>
+<pin name="GND" x="-14" y="-11" length="middle"/>
+<pin name="SCL" x="16" y="19" length="middle" rot="R180"/>
+<pin name="SDA" x="16" y="16" length="middle" rot="R180"/>
+<pin name="SA0" x="16" y="13" length="middle" rot="R180"/>
+<pin name="CS" x="16" y="10" length="middle" rot="R180"/>
+<pin name="INT1" x="16" y="-6" length="middle" rot="R180"/>
+<pin name="INT2" x="16" y="-9" length="middle" rot="R180"/>
+<pin name="VDD" x="-14" y="17" length="middle"/>
+<pin name="GND3" x="-14" y="-2" length="middle"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="L3GD20H">
@@ -155,6 +177,36 @@
 <connect gate="G$1" pin="SDA" pad="11"/>
 <connect gate="G$1" pin="VDD" pad="14"/>
 <connect gate="G$1" pin="VDD_IO" pad="13"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LSM303D">
+<gates>
+<gate name="G$1" symbol="LSM303D" x="-2.54" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="LGA16_3X3MM">
+<connects>
+<connect gate="G$1" pin="C1" pad="15"/>
+<connect gate="G$1" pin="CS" pad="8"/>
+<connect gate="G$1" pin="GND" pad="5"/>
+<connect gate="G$1" pin="GND1" pad="12"/>
+<connect gate="G$1" pin="GND2" pad="13"/>
+<connect gate="G$1" pin="GND3" pad="16"/>
+<connect gate="G$1" pin="INT1" pad="11"/>
+<connect gate="G$1" pin="INT2" pad="9"/>
+<connect gate="G$1" pin="RSRVD" pad="10"/>
+<connect gate="G$1" pin="SA0" pad="7"/>
+<connect gate="G$1" pin="SCL" pad="4"/>
+<connect gate="G$1" pin="SDA" pad="6"/>
+<connect gate="G$1" pin="SETC" pad="2"/>
+<connect gate="G$1" pin="SETP" pad="3"/>
+<connect gate="G$1" pin="VDD" pad="14"/>
+<connect gate="G$1" pin="VDD_IO" pad="1"/>
 </connects>
 <technologies>
 <technology name=""/>
