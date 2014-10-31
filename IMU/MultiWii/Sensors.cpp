@@ -31,7 +31,7 @@ void ACC_init();
   #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = X; imu.accADC[PITCH]  = Y; imu.accADC[YAW]  = Z;}
 #endif
 #if !defined(GYRO_ORIENTATION) 
-  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = X; imu.gyroADC[PITCH] = Y; imu.gyroADC[YAW] = Z;}
+  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[PITCH] = -X; imu.gyroADC[ROLL] = -Y; imu.gyroADC[YAW] = Z;}
 #endif
 #if !defined(MAG_ORIENTATION) 
   #define MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  = X; imu.magADC[PITCH]  = Y; imu.magADC[YAW]  = Z;}
@@ -1014,26 +1014,27 @@ void ACC_init () {
 }
 #endif
 
+
 // ************************************************************************************************************
 // LSM303DLHC I2C Accelerometer
 // I2C adress: 0x32 (8bit)
 // ************************************************************************************************************
 #if defined(LSM303DLHC_ACC)
-#define LSM303DLHCAA  0x32 >> 1 // I2C adress: 0x32 (7bit)
+#define LSM303DLHCAA  0x32 >> 1 // I2C accelerometer address 
 void ACC_init () {
-  i2c_writeReg(LSM303DLHCAA,0x20,0x57);  // CTRL_REG1_A   0100 0111  Pwr on, 50Hz
-//  i2c_writeReg(LSM303DLHCAA,0x21,0x00);  // CTRL_REG2_A   HP filter disable 
-//  i2c_writeReg(LSM303DLHCAA,0x23,0x30);  // CTRL_REG3_A   Little endian 16G FS
+  i2c_writeReg(LSM303DLHCAA,0x20,0x57);   // 100Hz data rate, XYZ enable
 }
 
   void ACC_getADC () {
-  TWBR = ((16000000L / 400000L) - 16) / 2;
+  TWBR = ((F_CPU / 100000L) - 16) / 2; //100 kHz clock
   i2c_getSixRawADC(LSM303DLHCAA,0x28 | 0x80);
-//
-//  ACC_ORIENTATION( ((rawADC[1]<<8) | rawADC[0])/8 ,
-//                   ((rawADC[3]<<8) | rawADC[2])/8 ,
-//                   ((rawADC[5]<<8) | rawADC[4])/8 );
-  ACC_ORIENTATION(19293,393,65000);
+
+ ACC_ORIENTATION( ((rawADC[1]<<8) | rawADC[0])>>4 ,
+                  ((rawADC[3]<<8) | rawADC[2])>>4 ,
+                  ((rawADC[5]<<8) | rawADC[4])>>4 );
+
+ // ACC_ORIENTATION(rawADC[0],rawADC[2],rawADC[4]);  
+  // ACC_ORIENTATION(millis(),millis()<<1,millis()<<2);
   ACC_Common();
 }
 #endif
@@ -1081,6 +1082,29 @@ void Gyro_getADC () {
   GYRO_Common();
 }
 #endif
+
+
+// ************************************************************************************************************
+// I2C Gyroscope L3GD20
+// ************************************************************************************************************
+#if defined(L3GD20)
+#define L3GD20_ADR 0x6B  //I2C address, minus the last bit (write/read)
+void Gyro_init(){
+  i2c_writeReg(L3GD20_ADR, 0x20, 0x0F);   //Ctrl reg 1: 100Hz, normal power, XYZ enable
+  i2c_writeReg(L3GD20_ADR, 0x23, 0x30);
+}
+
+void Gyro_getADC(){
+  TWBR = ((F_CPU / 100000L) - 16) / 2;  //100 kHz clock
+  i2c_getSixRawADC(L3GD20_ADR, 0x28 | 0x80);
+  GYRO_ORIENTATION( ((rawADC[1]<<8) | rawADC[0]) ,
+                    ((rawADC[3]<<8) | rawADC[2]) ,
+                    ((rawADC[5]<<8) | rawADC[4]) );
+  GYRO_Common();
+}
+
+#endif
+
 
 // ************************************************************************************************************
 // I2C Gyroscope ITG3200 
