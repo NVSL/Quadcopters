@@ -29,7 +29,7 @@ static uint8_t serialBufferTX[TX_BUFFER_SIZE][UART_NUMBER];
 
 #if defined(PROMINI) || defined(MEGA)
   #if defined(PROMINI)
-  ISR(USART_UDRE_vect) {  // Serial 0 on a PROMINI
+  ISR(USART0_UDRE_vect) {  // Serial 0 on a PROMINI
   #endif
   #if defined(MEGA)
   ISR(USART0_UDRE_vect) { // Serial 0 on a MEGA
@@ -175,7 +175,7 @@ void store_uart_in_buf(uint8_t data, uint8_t portnum) {
 }
 
 #if defined(PROMINI)
-  ISR(USART_RX_vect)  { store_uart_in_buf(UDR0, 0); }
+  ISR(USART0_RX_vect)  { store_uart_in_buf(UDR0, 0); }
 #endif
 #if defined(PROMICRO)
   ISR(USART1_RX_vect)  { store_uart_in_buf(UDR1, 1); }
