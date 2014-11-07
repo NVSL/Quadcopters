@@ -38,7 +38,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
@@ -130,6 +130,11 @@
 <wire x1="51.74" y1="2.54" x2="51.74" y2="36.82" width="0" layer="20"/>
 <wire x1="51.74" y1="36.82" x2="8.89" y2="36.82" width="0" layer="20"/>
 <wire x1="8.89" y1="36.82" x2="8.89" y2="2.54" width="0" layer="20"/>
+<text x="11.43" y="33.02" size="1.778" layer="1">Motor Driver Board</text>
+<hole x="10.16" y="3.81" drill="1.1"/>
+<hole x="49.53" y="3.81" drill="1.1"/>
+<hole x="10.16" y="35.56" drill="1.1"/>
+<hole x="49.53" y="35.56" drill="1.1"/>
 </plain>
 <libraries>
 <library name="diode">
@@ -404,7 +409,7 @@ at 30/07/2012 17:45:58</description>
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules name="default">
+<designrules name="default *">
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
@@ -437,7 +442,7 @@ design rules under a new name.</description>
 <param name="mdDrill" value="8mil"/>
 <param name="mdSmdStop" value="0mil"/>
 <param name="msWidth" value="10mil"/>
-<param name="msDrill" value="24mil"/>
+<param name="msDrill" value="20mil"/>
 <param name="msMicroVia" value="9.99mm"/>
 <param name="msBlindViaRatio" value="0.5"/>
 <param name="rvPadTop" value="0.25"/>
@@ -735,6 +740,16 @@ design rules under a new name.</description>
 <wire x1="21.59" y1="10.16" x2="21.59" y2="7.62" width="1.016" layer="1"/>
 </signal>
 </signals>
+<errors>
+<approved hash="1,20,ccd0c4a0cb99c3e9"/>
+<approved hash="1,20,12d4daa4d59d1ded"/>
+<approved hash="1,20,c172c902ca09c279"/>
+<approved hash="1,20,1f76d706d40d1c7d"/>
+<approved hash="1,20,c2e0ca90ca81c2f1"/>
+<approved hash="1,20,1ce4d494d4851cf5"/>
+<approved hash="1,20,cc56c426ca29c259"/>
+<approved hash="1,20,1252da22d42d1c5d"/>
+</errors>
 </board>
 </drawing>
 </eagle>
