@@ -32,6 +32,13 @@
   static uint16_t sbusIndex=0;
 #elif defined(SPEKTRUM)
   static uint8_t rcChannel[RC_CHANS] = {PITCH,YAW,THROTTLE,ROLL,AUX1,AUX2,AUX3,AUX4,8,9,10,11};
+#elif defined(ATMEGA128RF)
+  // A buffer to maintain data being received by radio.
+    const int RF_BUFFER_SIZE = 128;
+    char radioRXBuffer[RF_BUFFER_SIZE];
+    volatile uint8_t rxDataLength = 0;
+    // Global variable shared between RX ISRs
+    uint8_t rssiRaw;
 #else // Standard Channel order
   static uint8_t rcChannel[RC_CHANS]  = {ROLLPIN, PITCHPIN, YAWPIN, THROTTLEPIN, AUX1PIN,AUX2PIN,AUX3PIN,AUX4PIN};
   static uint8_t PCInt_RX_Pins[PCINT_PIN_COUNT] = {PCINT_RX_BITS}; // if this slowes the PCINT readings we can switch to a define for each pcint bit
@@ -101,6 +108,57 @@ void configureReceiver() {
   // Init SBUS RX
   #if defined(SBUS)
     SerialOpen(1,100000);
+  #endif
+
+  /*************************   ATMEGA128RF RX Setup   ********************************/
+  #if defined(ATMEGA128RF)
+
+    //For debug only
+    //SerialOpen(1,9600);
+
+    memset(radioRXBuffer,0, RF_BUFFER_SIZE);
+
+	// Transceiver Pin Register -- TRXPR.
+	// This register can be used to reset the transceiver, without
+	// resetting the MCU.
+	TRXPR |= (1<<TRXRST);   // TRXRST = 1 (Reset state, resets all registers)
+
+	// Transceiver Interrupt Enable Mask - IRQ_MASK
+	// This register disables/enables individual radio interrupts.
+	// First, we'll disable IRQ and clear any pending IRQ's
+	IRQ_MASK = 0;  // Disable all IRQs
+
+	// Transceiver State Control Register -- TRX_STATE
+	// This regiseter controls the states of the radio.
+	// First, we'll set it to the TRX_OFF state.
+	TRX_STATE = (TRX_STATE & 0xE0) | TRX_OFF;  // Set to TRX_OFF state
+	delay(1);
+
+	//TODO
+	// Transceiver Status Register -- TRX_STATUS
+	// This read-only register contains the present state of the radio transceiver.
+	// After telling it to go to the TRX_OFF state, we'll make sure it's actually
+	// there.
+	// Pray here!
+	//if ((TRX_STATUS & 0x1F) != TRX_OFF) // Check to make sure state is correct
+	//  return 0;	// Error, TRX isn't off
+
+	// Transceiver Control Register 1 - TRX_CTRL_1
+	// We'll use this register to turn on automatic CRC calculations.
+	TRX_CTRL_1 |= (1<<TX_AUTO_CRC_ON);  // Enable automatic CRC calc.
+
+	// Enable RX start/end and TX end interrupts
+	IRQ_MASK = (1<<RX_START_EN) | (1<<RX_END_EN) | (1<<TX_END_EN);
+
+	// Transceiver Clear Channel Assessment (CCA) -- PHY_CC_CCA
+	// This register is used to set the channel. CCA_MODE should default
+	// to Energy Above Threshold Mode.
+	// Channel should be between 11 and 26 (2405 MHz to 2480 MHz)
+	PHY_CC_CCA = (PHY_CC_CCA & 0xE0) | ATMEGA128RF_CHANNEL; // Set the channel to 11
+
+	// Finally, we'll enter into the RX_ON state. Now waiting for radio RX's, unless
+	// we go into a transmitting state.
+	TRX_STATE = (TRX_STATE & 0xE0) | RX_ON; // Default to receiver
   #endif
 }
 
@@ -380,13 +438,114 @@ void readSpektrum(void) {
 }
 #endif
 
+/**************************************************************************************/
+/***************               ATmega128RF RX reading              ********************/
+/**************************************************************************************/
+#if defined(ATMEGA128RF)
+
+// This function sends a string of characters out of the radio.
+// Given a string, it'll format a frame, and send it out.
+void rfPrint(char * toPrint)
+{
+  uint8_t frame[RF_BUFFER_SIZE];  // We'll need to turn the string into an arry
+  int length = strlen(toPrint);  // Get the length of the string
+
+  // Cut the data if length is > 126, return.
+  if(length > RF_BUFFER_SIZE-2)
+	  length = RF_BUFFER_SIZE-2;
+
+  // Fill our array with bytes in the string, it doesn't send the null
+  for (int i=0; i<length; i++)
+  {
+    frame[i] = toPrint[i];
+  }
+
+  // Transceiver State Control Register -- TRX_STATE
+  // This regiseter controls the states of the radio.
+  // Set to the PLL_ON state - this state begins the TX.
+  TRX_STATE = (TRX_STATE & 0xE0) | PLL_ON;  // Set to TX start state
+  while(!(TRX_STATUS & PLL_ON));  // Wait for PLL to lock
+
+  // Start of frame buffer - TRXFBST
+  // This is the first byte of the 128 byte frame. It should contain
+  // the length of the transmission.
+  // Protocol, total 128 bytes = <lenght 1 byte> <Data 126 bytes> <FCS 1 byte>
+  TRXFBST = length + 2;
+  memcpy((void *)(&TRXFBST+1), frame, length);
+  // Transceiver Pin Register -- TRXPR.
+  // From the PLL_ON state, setting SLPTR high will initiate the TX.
+  TRXPR |= (1<<SLPTR);   // SLPTR high
+  TRXPR &= ~(1<<SLPTR);  // SLPTR low
+
+  // After sending the byte, set the radio back into the RX waiting state.
+  TRX_STATE = (TRX_STATE & 0xE0) | RX_ON;
+}
+
+// Returns the length of the data if there is data available, 0 if not.
+unsigned int rfAvailable()
+{
+  return rxDataLength;
+}
+
+// This function returns the current received data.
+char * rfRead()
+{
+  rxDataLength =0;
+  return radioRXBuffer;
+}
+
+// This interrupt is called when radio TX is complete. We'll just
+// use it to turn off our TX LED.
+ISR(TRX24_TX_END_vect)
+{
+
+}
+
+// This interrupt is called the moment data is received by the radio.
+// We'll use it to gather information about RSSI -- signal strength --
+// and we'll turn on the RX LED.
+ISR(TRX24_RX_START_vect)
+{
+  rssiRaw = PHY_RSSI;  // Read in the received signal strength
+}
+
+// This interrupt is called at the end of data receipt. Here we'll gather
+// up the data received. And store it into a global variable.
+ISR(TRX24_RX_END_vect)
+{
+  uint8_t length;
+  uint8_t frame_checksum;
+
+  // The received signal must be above a certain threshold.
+  if (rssiRaw & RX_CRC_VALID)
+  {
+    // The length of the message will be the first byte received.
+    length = TST_RX_LENGTH;
+    // The remaining bytes will be our received data.
+    memcpy(&radioRXBuffer[0], (void*)&TRXFBST, length);
+    // Get the frame checksum Sequence (FCS)
+    frame_checksum = radioRXBuffer[length-2];
+    // Replace the checksum with a null or '\0'
+    radioRXBuffer[length-2] = '\0';
+  }
+
+  rxDataLength = length;
+}
+
+#endif
+
+
+
+
 uint16_t readRawRC(uint8_t chan) {
-  uint16_t data;
+  uint16_t data = 0;
   #if defined(SPEKTRUM)
     readSpektrum();
     if (chan < RC_CHANS) {
       data = rcValue[rcChannel[chan]];
     } else data = 1500;
+  #elif defined(ATMEGA128RF)
+    //Nothing
   #else
     uint8_t oldSREG;
     oldSREG = SREG; cli(); // Let's disable interrupts
@@ -400,42 +559,68 @@ uint16_t readRawRC(uint8_t chan) {
 /***************          compute and Filter the RX data           ********************/
 /**************************************************************************************/
 void computeRC() {
-  static uint16_t rcData4Values[RC_CHANS][4], rcDataMean[RC_CHANS];
-  static uint8_t rc4ValuesIndex = 0;
-  uint8_t chan,a;
-  #if !defined(OPENLRSv2MULTI) // dont know if this is right here
-    #if defined(SBUS)
-      readSBus();
-    #endif
-    rc4ValuesIndex++;
-    if (rc4ValuesIndex == 4) rc4ValuesIndex = 0;
-    for (chan = 0; chan < RC_CHANS; chan++) {
-      #if defined(FAILSAFE)
-        uint16_t rcval = readRawRC(chan);
-        if(rcval>FAILSAFE_DETECT_TRESHOLD || chan > 3 || !f.ARMED) {        // update controls channel only if pulse is above FAILSAFE_DETECT_TRESHOLD
-          rcData4Values[chan][rc4ValuesIndex] = rcval;                      // In disarmed state allow always update for easer configuration.
-        }
-      #else
-        rcData4Values[chan][rc4ValuesIndex] = readRawRC(chan);
-      #endif
-      #if defined(SPEKTRUM) || defined(SBUS) // no averaging for Spektrum & SBUS signal
-        rcData[chan] = rcData4Values[chan][rc4ValuesIndex];
-      #else
-        rcDataMean[chan] = 0;
-        for (a=0;a<4;a++) rcDataMean[chan] += rcData4Values[chan][a];
-        rcDataMean[chan]= (rcDataMean[chan]+2)>>2;
-        if ( rcDataMean[chan] < (uint16_t)rcData[chan] -3)  rcData[chan] = rcDataMean[chan]+2;
-        if ( rcDataMean[chan] > (uint16_t)rcData[chan] +3)  rcData[chan] = rcDataMean[chan]-2;
-      #endif
-      if (chan<8 && rcSerialCount > 0) { // rcData comes from MSP and overrides RX Data until rcSerialCount reaches 0
-        rcSerialCount --;
-        #if defined(FAILSAFE)
-          failsafeCnt = 0;
-        #endif
-        if (rcSerial[chan] >900) {rcData[chan] = rcSerial[chan];} // only relevant channels are overridden
-      }
-    }
-  #endif
+	uint8_t chan,a;
+	char tmpBuf[50];
+
+	//TODO Check, optimize and add validations this function
+	#if defined(ATMEGA128RF)
+
+	//Data comes from the ATMEGA128RF internal transceiver
+	if(rfAvailable()>=RC_CHANS*sizeof(int16_t)) {
+		memcpy(rcData, rfRead(), RC_CHANS*sizeof(int16_t));
+	}
+
+	// rcData comes from MSP and overrides RX Data until rcSerialCount reaches 0
+	if (rcSerialCount > 0){
+		for (chan = 0; chan < RC_CHANS; chan++) {
+			if (chan<8) {
+				rcSerialCount --;
+				#if defined(FAILSAFE)
+				  failsafeCnt = 0;
+				#endif
+				if (rcSerial[chan] >900) {rcData[chan] = rcSerial[chan];} // only relevant channels are overridden
+			}
+		}
+	}
+
+	#else
+	  static uint16_t rcData4Values[RC_CHANS][4], rcDataMean[RC_CHANS];
+	  static uint8_t rc4ValuesIndex = 0;
+
+	  #if !defined(OPENLRSv2MULTI) // dont know if this is right here
+		#if defined(SBUS)
+		  readSBus();
+		#endif
+		rc4ValuesIndex++;
+		if (rc4ValuesIndex == 4) rc4ValuesIndex = 0;
+		for (chan = 0; chan < RC_CHANS; chan++) {
+		  #if defined(FAILSAFE)
+			uint16_t rcval = readRawRC(chan);
+			if(rcval>FAILSAFE_DETECT_TRESHOLD || chan > 3 || !f.ARMED) {        // update controls channel only if pulse is above FAILSAFE_DETECT_TRESHOLD
+			  rcData4Values[chan][rc4ValuesIndex] = rcval;                      // In disarmed state allow always update for easer configuration.
+			}
+		  #else
+			rcData4Values[chan][rc4ValuesIndex] = readRawRC(chan);
+		  #endif
+		  #if defined(SPEKTRUM) || defined(SBUS) // no averaging for Spektrum & SBUS signal
+			rcData[chan] = rcData4Values[chan][rc4ValuesIndex];
+		  #else
+			rcDataMean[chan] = 0;
+			for (a=0;a<4;a++) rcDataMean[chan] += rcData4Values[chan][a];
+			rcDataMean[chan]= (rcDataMean[chan]+2)>>2;
+			if ( rcDataMean[chan] < (uint16_t)rcData[chan] -3)  rcData[chan] = rcDataMean[chan]+2;
+			if ( rcDataMean[chan] > (uint16_t)rcData[chan] +3)  rcData[chan] = rcDataMean[chan]-2;
+		  #endif
+		  if (chan<8 && rcSerialCount > 0) { // rcData comes from MSP and overrides RX Data until rcSerialCount reaches 0
+			rcSerialCount --;
+			#if defined(FAILSAFE)
+			  failsafeCnt = 0;
+			#endif
+			if (rcSerial[chan] >900) {rcData[chan] = rcSerial[chan];} // only relevant channels are overridden
+		  }
+		}
+	  #endif
+	#endif
 }
 
 

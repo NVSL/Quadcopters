@@ -116,6 +116,7 @@ void SerialOpen(uint8_t port, uint32_t baud) {
   switch (port) {
     #if defined(PROMINI)
       case 0: UCSR0A  = (1<<U2X0); UBRR0H = h; UBRR0L = l; UCSR0B |= (1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0); break;
+      case 1: UCSR1A  = (1<<U2X1); UBRR1H = h; UBRR1L = l; UCSR1B |= (1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1); break;
     #endif
     #if defined(PROMICRO)
       #if (ARDUINO >= 100) && !defined(TEENSY20)
@@ -136,6 +137,7 @@ void SerialEnd(uint8_t port) {
   switch (port) {
     #if defined(PROMINI)
       case 0: UCSR0B &= ~((1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0)|(1<<UDRIE0)); break;
+      case 1: UCSR1B &= ~((1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1)|(1<<UDRIE1)); break;
     #endif
     #if defined(PROMICRO)
       case 1: UCSR1B &= ~((1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1)|(1<<UDRIE1)); break;
