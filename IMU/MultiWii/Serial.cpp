@@ -29,7 +29,7 @@ static uint8_t serialBufferTX[TX_BUFFER_SIZE][UART_NUMBER];
 
 #if defined(PROMINI) || defined(MEGA)
   #if defined(PROMINI)
-  ISR(USART_UDRE_vect) {  // Serial 0 on a PROMINI
+  ISR(USART0_UDRE_vect) {  // Serial 0 on a PROMINI
   #endif
   #if defined(MEGA)
   ISR(USART0_UDRE_vect) { // Serial 0 on a MEGA
@@ -116,6 +116,7 @@ void SerialOpen(uint8_t port, uint32_t baud) {
   switch (port) {
     #if defined(PROMINI)
       case 0: UCSR0A  = (1<<U2X0); UBRR0H = h; UBRR0L = l; UCSR0B |= (1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0); break;
+      case 1: UCSR1A  = (1<<U2X1); UBRR1H = h; UBRR1L = l; UCSR1B |= (1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1); break;
     #endif
     #if defined(PROMICRO)
       #if (ARDUINO >= 100) && !defined(TEENSY20)
@@ -136,6 +137,7 @@ void SerialEnd(uint8_t port) {
   switch (port) {
     #if defined(PROMINI)
       case 0: UCSR0B &= ~((1<<RXEN0)|(1<<TXEN0)|(1<<RXCIE0)|(1<<UDRIE0)); break;
+      case 1: UCSR1B &= ~((1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1)|(1<<UDRIE1)); break;
     #endif
     #if defined(PROMICRO)
       case 1: UCSR1B &= ~((1<<RXEN1)|(1<<TXEN1)|(1<<RXCIE1)|(1<<UDRIE1)); break;
@@ -175,7 +177,7 @@ void store_uart_in_buf(uint8_t data, uint8_t portnum) {
 }
 
 #if defined(PROMINI)
-  ISR(USART_RX_vect)  { store_uart_in_buf(UDR0, 0); }
+  ISR(USART0_RX_vect)  { store_uart_in_buf(UDR0, 0); }
 #endif
 #if defined(PROMICRO)
   ISR(USART1_RX_vect)  { store_uart_in_buf(UDR1, 1); }

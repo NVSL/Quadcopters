@@ -35,8 +35,8 @@
     //#define GIMBAL
     //#define BI
     //#define TRI
-    #define QUADP
-    //#define QUADX
+    // #define QUADP
+    #define QUADX
     //#define Y4
     //#define Y6
     //#define HEX6
@@ -366,7 +366,13 @@
          You have to invert the S-Bus-Serial Signal e.g. with a Hex-Inverter like IC SN74 LS 04 */
       //#define SBUS
       //#define SBUS_SERIAL_PORT 1
-      #define SBUS_MID_OFFSET 988 //SBUS Mid-Point at 1500
+      //#define SBUS_MID_OFFSET 988 //SBUS Mid-Point at 1500
+
+	/**********************    ATmega128RF receiver    *******************************/
+	/* This receiver is only for the ATmega128RFxx family which have internally a 2.4Ghz receiver*/
+	#define ATMEGA128RF
+	#define ATMEGA128RF_CHANNEL	11	//This channel should be only between 11 and 26
+
 
 /*************************************************************************************************/
 /*****************                                                                 ***************/
