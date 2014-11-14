@@ -17,7 +17,7 @@ void initializeServo();
 // since we are uing the PWM generation in a direct way, the pin order is just to inizialie the right pins 
 // its not possible to change a PWM output pin just by changing the order
 #if defined(PROMINI)
-  uint8_t PWM_PIN[8] = {9,10,11,3,6,5,A2,12};   //for a quad+: rear,right,left,front
+  uint8_t PWM_PIN[8] = {8,9,3,35,6,5,A2,12};   //for a quad+: rear,right,left,front
 #endif
 #if defined(PROMICRO)
   #if !defined(HWPWM6)
@@ -365,31 +365,31 @@ void writeMotors() { // [1000;2000] => [125;250]
   #endif
 
   /********  Specific PWM Timers & Registers for the atmega328P (Promini)   ************/
-  #if defined(PROMINI)
+  #if defined(PROMINI)	//Values where modified to drive brushed. Values go from 0 to 250
     #if (NUMBER_MOTOR > 0)
       #ifndef EXT_MOTOR_RANGE 
-        OCR1A = motor[0]>>3; //  pin 9
+        OCR1A = (motor[0] - 1000)>>2; //  pin 8
       #else
         OCR1A = ((motor[0]>>2) - 250);
       #endif
     #endif
     #if (NUMBER_MOTOR > 1)
       #ifndef EXT_MOTOR_RANGE 
-        OCR1B = motor[1]>>3; //  pin 10
+        OCR2A = (motor[1] - 1000)>>2; //  pin 9
       #else
         OCR1B = ((motor[1]>>2) - 250);
       #endif
     #endif
     #if (NUMBER_MOTOR > 2)
       #ifndef EXT_MOTOR_RANGE
-        OCR2A = motor[2]>>3; //  pin 11
+        OCR3A = (motor[2] - 1000)>>2; //  pin 3
       #else
         OCR2A = ((motor[2]>>2) - 250);
       #endif
     #endif
     #if (NUMBER_MOTOR > 3)
       #ifndef EXT_MOTOR_RANGE
-        OCR2B = motor[3]>>3; //  pin 3
+        OCR0A = (motor[3]-1000)>>2; //  pin 35
       #else
         OCR2B = ((motor[3]>>2) - 250);
       #endif
@@ -533,16 +533,16 @@ void initOutput() {
   /********  Specific PWM Timers & Registers for the atmega328P (Promini)   ************/
   #if defined(PROMINI)
     #if (NUMBER_MOTOR > 0)
-      TCCR1A |= _BV(COM1A1); // connect pin 9 to timer 1 channel A
+      TCCR1A |= _BV(COM1A1); // connect pin 8 to timer 1 channel A
     #endif
     #if (NUMBER_MOTOR > 1)
-      TCCR1A |= _BV(COM1B1); // connect pin 10 to timer 1 channel B
+      TCCR2A |= _BV(COM2A1); // connect pin 9 to timer 1 channel A
     #endif
     #if (NUMBER_MOTOR > 2)
-      TCCR2A |= _BV(COM2A1); // connect pin 11 to timer 2 channel A
+      TCCR3A |= _BV(COM3A1); // connect pin 3 to timer 2 channel A
     #endif
     #if (NUMBER_MOTOR > 3)
-      TCCR2A |= _BV(COM2B1); // connect pin 3 to timer 2 channel B
+      TCCR0A |= _BV(COM0A1); // connect pin 35 to timer 2 channel A
     #endif
     #if (NUMBER_MOTOR > 4)  // PIN 5 & 6 or A0 & A1
       initializeSoftPWM();
