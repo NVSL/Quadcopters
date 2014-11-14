@@ -18748,8 +18748,11 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 </variantdefs>
 <classes>
 <class number="0" name="default" width="0" drill="0">
+<clearance class="0" value="0.205"/>
 </class>
 <class number="1" name="RFSIG" width="0.4572" drill="0">
+<clearance class="0" value="0.205"/>
+<clearance class="1" value="0.205"/>
 </class>
 </classes>
 <parts>
@@ -19536,6 +19539,12 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <wire x1="-2.54" y1="63.5" x2="-5.08" y2="63.5" width="0.1524" layer="91"/>
 <label x="-5.08" y="63.5" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="-15.24" y1="81.28" x2="-15.24" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="88.9" x2="-27.94" y2="88.9" width="0.1524" layer="91"/>
+<label x="-27.94" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="PE5" class="0">
 <segment>
@@ -19556,6 +19565,11 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <pinref part="U1" gate="G$1" pin="PE3(OC3A/AIN1)"/>
 <wire x1="-2.54" y1="71.12" x2="-5.08" y2="71.12" width="0.1524" layer="91"/>
 <label x="-5.08" y="71.12" size="1.27" layer="95" rot="MR0" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U3" gate="A" pin="4B"/>
+<wire x1="-78.74" y1="226.06" x2="-81.28" y2="226.06" width="0.1524" layer="91"/>
+<label x="-81.28" y="226.06" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="PE2" class="0">
@@ -19678,15 +19692,9 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <label x="-5.08" y="106.68" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
 <segment>
-<pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="-15.24" y1="81.28" x2="-15.24" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="-15.24" y1="88.9" x2="-27.94" y2="88.9" width="0.1524" layer="91"/>
-<label x="-27.94" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
-<pinref part="U3" gate="A" pin="4B"/>
-<wire x1="-78.74" y1="226.06" x2="-81.28" y2="226.06" width="0.1524" layer="91"/>
-<label x="-81.28" y="226.06" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U3" gate="A" pin="1B"/>
+<wire x1="-78.74" y1="233.68" x2="-81.28" y2="233.68" width="0.1524" layer="91"/>
+<label x="-81.28" y="233.68" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="PB6" class="0">
@@ -19700,11 +19708,6 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <wire x1="-25.4" y1="81.28" x2="-25.4" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="-25.4" y1="83.82" x2="-27.94" y2="83.82" width="0.1524" layer="91"/>
 <label x="-27.94" y="83.82" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
-<pinref part="U3" gate="A" pin="3B"/>
-<wire x1="-78.74" y1="228.6" x2="-81.28" y2="228.6" width="0.1524" layer="91"/>
-<label x="-81.28" y="228.6" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="PB5" class="0">
@@ -19726,9 +19729,9 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <wire x1="-2.54" y1="114.3" x2="-5.08" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="U3" gate="A" pin="1B"/>
-<wire x1="-78.74" y1="233.68" x2="-81.28" y2="233.68" width="0.1524" layer="91"/>
-<label x="-81.28" y="233.68" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U3" gate="A" pin="3B"/>
+<wire x1="-78.74" y1="228.6" x2="-81.28" y2="228.6" width="0.1524" layer="91"/>
+<label x="-81.28" y="228.6" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="MISO" class="0">
