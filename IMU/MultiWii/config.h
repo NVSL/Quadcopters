@@ -452,10 +452,10 @@
 
   //#define OVERRIDE_PSENSORPIN                 A1 // instead of A2    // Analog PIN 2
 
-  //#define OVERRIDE_LEDPIN_PINMODE             pinMode (A1, OUTPUT); // use A1 instead of d13
-  //#define OVERRIDE_LEDPIN_TOGGLE              PINC |= 1<<1; // PINB |= 1<<5;     //switch LEDPIN state (digital PIN 13)
-  //#define OVERRIDE_LEDPIN_OFF                 PORTC &= ~(1<<1); // PORTB &= ~(1<<5);
-  //#define OVERRIDE_LEDPIN_ON                  PORTC |= 1<<1;    // was PORTB |= (1<<5);
+  #define OVERRIDE_LEDPIN_PINMODE             pinMode (34, OUTPUT); // use A1 instead of d13
+  #define OVERRIDE_LEDPIN_TOGGLE              PINB |= 1<<6;     //switch LEDPIN state (digital PIN 13)
+  #define OVERRIDE_LEDPIN_OFF                 PORTB &= ~(1<<6);
+  #define OVERRIDE_LEDPIN_ON                  PORTB |= (1<<6);
 
   //#define OVERRIDE_BUZZERPIN_PINMODE          pinMode (A2, OUTPUT); // use A2 instead of d8
   //#define OVERRIDE_BUZZERPIN_ON               PORTC |= 1<<2 //PORTB |= 1;
