@@ -17,7 +17,7 @@ void initializeServo();
 // since we are uing the PWM generation in a direct way, the pin order is just to inizialie the right pins 
 // its not possible to change a PWM output pin just by changing the order
 #if defined(PROMINI)
-  uint8_t PWM_PIN[8] = {8,9,3,35,6,5,A2,12};   //for a quad+: rear,right,left,front
+  uint8_t PWM_PIN[8] = {8,9,3,4,6,5,A2,12};   //for a quad+: rear,right,left,front
 #endif
 #if defined(PROMICRO)
   #if !defined(HWPWM6)
@@ -389,7 +389,7 @@ void writeMotors() { // [1000;2000] => [125;250]
     #endif
     #if (NUMBER_MOTOR > 3)
       #ifndef EXT_MOTOR_RANGE
-        OCR0A = (motor[3]-1000)>>2; //  pin 35
+        OCR3B = (motor[3]-1000)>>2; //  pin 4
       #else
         OCR2B = ((motor[3]>>2) - 250);
       #endif
@@ -533,16 +533,16 @@ void initOutput() {
   /********  Specific PWM Timers & Registers for the atmega328P (Promini)   ************/
   #if defined(PROMINI)
     #if (NUMBER_MOTOR > 0)
-      TCCR1A |= _BV(COM1A1); // connect pin 8 to timer 1 channel A
+      TCCR1A |= _BV(COM1A1); // connect pin 8 to timer (OCR1A) channel A
     #endif
     #if (NUMBER_MOTOR > 1)
-      TCCR2A |= _BV(COM2A1); // connect pin 9 to timer 1 channel A
+      TCCR2A |= _BV(COM2A1); // connect pin 9 to timer (OCR2A) channel A
     #endif
     #if (NUMBER_MOTOR > 2)
-      TCCR3A |= _BV(COM3A1); // connect pin 3 to timer 2 channel A
+      TCCR3A |= _BV(COM3A1); // connect pin 3 to timer (OCR3A) channel A
     #endif
     #if (NUMBER_MOTOR > 3)
-      TCCR0A |= _BV(COM0A1); // connect pin 35 to timer 2 channel A
+      TCCR3A |= _BV(COM3B1); // connect pin 4 to timer (OCR3B) channel B
     #endif
     #if (NUMBER_MOTOR > 4)  // PIN 5 & 6 or A0 & A1
       initializeSoftPWM();
