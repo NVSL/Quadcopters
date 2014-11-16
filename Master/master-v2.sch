@@ -18889,6 +18889,7 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <attribute name="OC_FARNELL" value="2295710"/>
 </part>
 <part name="GND21" library="supply1" deviceset="GND" device=""/>
+<part name="JP4" library="SparkFun" deviceset="M02" device="PTH" value="Debug"/>
 </parts>
 <sheets>
 <sheet>
@@ -19055,6 +19056,7 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <attribute name="MPN" x="45.72" y="264.16" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="GND21" gate="1" x="-83.82" y="208.28"/>
+<instance part="JP4" gate="G$1" x="-58.42" y="139.7"/>
 </instances>
 <busses>
 </busses>
@@ -19539,12 +19541,6 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <wire x1="-2.54" y1="63.5" x2="-5.08" y2="63.5" width="0.1524" layer="91"/>
 <label x="-5.08" y="63.5" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
-<segment>
-<pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="-15.24" y1="81.28" x2="-15.24" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="-15.24" y1="88.9" x2="-27.94" y2="88.9" width="0.1524" layer="91"/>
-<label x="-27.94" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
 </net>
 <net name="PE5" class="0">
 <segment>
@@ -19558,6 +19554,11 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <pinref part="U1" gate="G$1" pin="PE4(OC3B/INT4)"/>
 <wire x1="-2.54" y1="68.58" x2="-5.08" y2="68.58" width="0.1524" layer="91"/>
 <label x="-5.08" y="68.58" size="1.27" layer="95" rot="MR0" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U3" gate="A" pin="1B"/>
+<wire x1="-78.74" y1="233.68" x2="-81.28" y2="233.68" width="0.1524" layer="91"/>
+<label x="-81.28" y="233.68" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="PE3" class="0">
@@ -19637,12 +19638,22 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <wire x1="-2.54" y1="93.98" x2="-5.08" y2="93.98" width="0.1524" layer="91"/>
 <label x="-5.08" y="93.98" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
+<segment>
+<pinref part="JP4" gate="G$1" pin="1"/>
+<wire x1="-50.8" y1="139.7" x2="-48.26" y2="139.7" width="0.1524" layer="91"/>
+<label x="-48.26" y="139.7" size="1.778" layer="95" xref="yes"/>
+</segment>
 </net>
 <net name="RX1" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="PD2(RXD1/INT2)"/>
 <wire x1="-2.54" y1="96.52" x2="-5.08" y2="96.52" width="0.1524" layer="91"/>
 <label x="-5.08" y="96.52" size="1.27" layer="95" rot="MR0" xref="yes"/>
+</segment>
+<segment>
+<pinref part="JP4" gate="G$1" pin="2"/>
+<wire x1="-50.8" y1="142.24" x2="-48.26" y2="142.24" width="0.1524" layer="91"/>
+<label x="-48.26" y="142.24" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -19692,9 +19703,10 @@ Created 2014-06-06, Karrer Zheng&lt;br&gt;
 <label x="-5.08" y="106.68" size="1.27" layer="95" rot="MR0" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U3" gate="A" pin="1B"/>
-<wire x1="-78.74" y1="233.68" x2="-81.28" y2="233.68" width="0.1524" layer="91"/>
-<label x="-81.28" y="233.68" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="-15.24" y1="81.28" x2="-15.24" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="88.9" x2="-27.94" y2="88.9" width="0.1524" layer="91"/>
+<label x="-27.94" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="PB6" class="0">
