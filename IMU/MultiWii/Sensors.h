@@ -4,7 +4,7 @@
 #if defined(MMA7455) || defined(MMA8451Q) || defined(ADXL345) || \
     defined(BMA180) || defined(BMA280) || defined(BMA020) || defined(NUNCHACK) || \
     defined(LIS3LV02) || defined(LSM303DLx_ACC) || defined(ADCACC) || \
-    defined(MPU6050) || defined(LSM330) || defined(NUNCHUCK) || defined(LSM303DLHC_ACC)
+    defined(MPU6050) || defined(LSM330) || defined(NUNCHUCK) || defined(LSM303DLHC_ACC) || defined(LSM303D_ACC)
 void ACC_getADC ();
 #endif
 

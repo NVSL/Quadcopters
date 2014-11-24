@@ -1591,7 +1591,7 @@
 /***************              Sensor Type definitions              ********************/
 /**************************************************************************************/
 
-#if defined(ADXL345) || defined(BMA020) || defined(BMA180) || defined(BMA280) || defined(NUNCHACK) || defined(MMA7455) || defined(ADCACC) || defined(LIS3LV02) || defined(LSM303DLx_ACC) || defined(LSM303DLHC_ACC) || defined(MPU6050) || defined(LSM330) || defined(MMA8451Q) || defined(NUNCHUCK)
+#if defined(ADXL345) || defined(BMA020) || defined(BMA180) || defined(BMA280) || defined(NUNCHACK) || defined(MMA7455) || defined(ADCACC) || defined(LIS3LV02) || defined(LSM303DLx_ACC) || defined(LSM303DLHC_ACC) || defined(LSM303D_ACC) || defined(MPU6050) || defined(LSM330) || defined(MMA8451Q) || defined(NUNCHUCK)
   #define ACC 1
 #else
   #define ACC 0
@@ -1705,6 +1705,7 @@
 #if defined(L3GD20)
   #define GYRO_SCALE ((70.0f * PI) / (180.0f * 1000000.0f * 1000.0f))
 #endif
+#define GYRO_SCALE 1
 
 /**************************************************************************************/
 /***************      Multitype decleration for the GUI's          ********************/

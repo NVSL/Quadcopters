@@ -1039,6 +1039,30 @@ void ACC_init () {
 }
 #endif
 
+// ************************************************************************************************************
+// LSM303D I2C Accelerometer
+// I2C adress: 0x3A (8bit)
+// ************************************************************************************************************
+#if defined(LSM303D_ACC)
+#define LSM303DAA  0x3A >> 1 // I2C accelerometer address 
+void ACC_init () {
+  i2c_writeReg(LSM303DAA,0x20,0x57);   // 100Hz data rate, XYZ enable
+}
+
+void ACC_getADC () {  
+  TWBR = ((F_CPU / 100000L) - 16) / 2; //100 kHz clock
+  i2c_getSixRawADC(LSM303DAA,0x28 | 0x80);
+
+ ACC_ORIENTATION( ((rawADC[1]<<8) | rawADC[0])>>4 ,
+                  ((rawADC[3]<<8) | rawADC[2])>>4 ,
+                  ((rawADC[5]<<8) | rawADC[4])>>4 );
+
+  ACC_Common();
+}
+#endif
+
+
+
 
 // ************************************************************************************************************
 // ADC ACC
