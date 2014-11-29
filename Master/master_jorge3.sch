@@ -11054,8 +11054,7 @@ Source: www.kingbright.com</description>
   Brushed Motot Driver
 - Changed Leds to 0603 package
 - Removed unesessary caps
-- Added Voltage testpoints in serial debuger.
-</text>
+- Added Voltage testpoints in serial debuger.</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="-96.6" y="155.82" rot="MR0"/>

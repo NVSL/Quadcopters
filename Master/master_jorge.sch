@@ -10949,12 +10949,12 @@ Source: www.kingbright.com</description>
 <part name="GND25" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="P+5" library="SparkFun-Aesthetics" deviceset="3.3V" device=""/>
 <part name="C15" library="resistor" deviceset="C-US" device="C0805" value="0.1uF"/>
-<part name="BOT" library="led" deviceset="LED" device="CHIPLED_0603" value="GREEN"/>
+<part name="D2" library="led" deviceset="LED" device="CHIPLED_0603" value="GREEN"/>
 <part name="C9" library="resistor" deviceset="C-US" device="C0805" value="0.75pF"/>
 <part name="GND13" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="C16" library="resistor" deviceset="C-US" device="C0805" value="JUMP"/>
 <part name="C17" library="resistor" deviceset="C-US" device="C0805" value="JUMP"/>
-<part name="ARM" library="led" deviceset="LED" device="CHIPLED_0603" value="GREEN"/>
+<part name="D3" library="led" deviceset="LED" device="CHIPLED_0603" value="GREEN"/>
 <part name="R5" library="resistor" deviceset="R-US_" device="R0805" value="330"/>
 <part name="R6" library="resistor" deviceset="R-US_" device="R0805" value="330"/>
 <part name="GND30" library="SparkFun" deviceset="GND" device=""/>
@@ -11015,7 +11015,7 @@ Source: www.kingbright.com</description>
 <part name="C23" library="resistor" deviceset="C-US" device="C0805" value="1uF"/>
 <part name="SUPPLY3" library="supply2" deviceset="GND" device=""/>
 <part name="R2" library="resistor" deviceset="R-US_" device="R0805" value="330"/>
-<part name="PWR" library="led" deviceset="LED" device="CHIPLED_0603" value="RED"/>
+<part name="D1" library="led" deviceset="LED" device="CHIPLED_0603" value="RED"/>
 <part name="SUPPLY4" library="supply2" deviceset="GND" device=""/>
 <part name="FRAME1" library="frames" deviceset="FRAME_B_L" device="" value="NONE"/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="M04" device="PTH" value="Debuger"/>
@@ -11055,7 +11055,9 @@ Source: www.kingbright.com</description>
 - Changed Leds to 0603 package
 - Removed unesessary caps
 - Added Voltage testpoints in serial debuger.
-</text>
+- TODO: CHECK Motor pin headers direction
+  and motor direction.
+- TODO: Check manually all Wires vs Layout</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="-96.6" y="155.82" rot="MR0"/>
@@ -11112,12 +11114,12 @@ Source: www.kingbright.com</description>
 <instance part="GND25" gate="1" x="-226.86" y="187.56"/>
 <instance part="P+5" gate="G$1" x="-226.86" y="218.04"/>
 <instance part="C15" gate="G$1" x="-214.16" y="205.34" rot="R90"/>
-<instance part="BOT" gate="G$1" x="-137.24" y="138.04" rot="MR0"/>
+<instance part="D2" gate="G$1" x="-137.24" y="138.04" rot="MR0"/>
 <instance part="C9" gate="G$1" x="-0.08" y="183.76" rot="MR180"/>
 <instance part="GND13" gate="1" x="-0.08" y="173.6" rot="MR0"/>
 <instance part="C16" gate="G$1" x="-30.56" y="191.38" rot="R90"/>
 <instance part="C17" gate="G$1" x="-33.1" y="171.06" rot="R270"/>
-<instance part="ARM" gate="G$1" x="-147.4" y="138.04" rot="MR0"/>
+<instance part="D3" gate="G$1" x="-147.4" y="138.04" rot="MR0"/>
 <instance part="R5" gate="G$1" x="-147.4" y="148.2" rot="R90"/>
 <instance part="R6" gate="G$1" x="-137.24" y="148.2" rot="R90"/>
 <instance part="GND30" gate="1" x="-147.4" y="127.88"/>
@@ -11178,7 +11180,7 @@ Source: www.kingbright.com</description>
 <instance part="C23" gate="G$1" x="-246.38" y="271.78" rot="MR0"/>
 <instance part="SUPPLY3" gate="GND" x="-233.68" y="269.24"/>
 <instance part="R2" gate="G$1" x="-172.72" y="269.24" rot="R90"/>
-<instance part="PWR" gate="G$1" x="-172.72" y="261.62" rot="MR0"/>
+<instance part="D1" gate="G$1" x="-172.72" y="261.62" rot="MR0"/>
 <instance part="SUPPLY4" gate="GND" x="-172.72" y="254"/>
 <instance part="FRAME1" gate="G$1" x="-284.48" y="25.4"/>
 <instance part="FRAME1" gate="G$2" x="37.64" y="30.4"/>
@@ -11274,12 +11276,12 @@ Source: www.kingbright.com</description>
 <wire x1="-0.08" y1="176.14" x2="-0.08" y2="181.22" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="ARM" gate="G$1" pin="C"/>
+<pinref part="D3" gate="G$1" pin="C"/>
 <pinref part="GND30" gate="1" pin="GND"/>
 <wire x1="-147.4" y1="132.96" x2="-147.4" y2="130.42" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="BOT" gate="G$1" pin="C"/>
+<pinref part="D2" gate="G$1" pin="C"/>
 <pinref part="GND31" gate="1" pin="GND"/>
 <wire x1="-137.24" y1="132.96" x2="-137.24" y2="130.42" width="0.1524" layer="91"/>
 </segment>
@@ -11407,7 +11409,7 @@ Source: www.kingbright.com</description>
 <pinref part="SUPPLY3" gate="GND" pin="GND"/>
 </segment>
 <segment>
-<pinref part="PWR" gate="G$1" pin="C"/>
+<pinref part="D1" gate="G$1" pin="C"/>
 <pinref part="SUPPLY4" gate="GND" pin="GND"/>
 </segment>
 <segment>
@@ -11885,14 +11887,14 @@ Source: www.kingbright.com</description>
 </net>
 <net name="N$8" class="0">
 <segment>
-<pinref part="ARM" gate="G$1" pin="A"/>
+<pinref part="D3" gate="G$1" pin="A"/>
 <pinref part="R5" gate="G$1" pin="1"/>
 <wire x1="-147.4" y1="143.12" x2="-147.4" y2="140.58" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$13" class="0">
 <segment>
-<pinref part="BOT" gate="G$1" pin="A"/>
+<pinref part="D2" gate="G$1" pin="A"/>
 <pinref part="R6" gate="G$1" pin="1"/>
 <wire x1="-137.24" y1="143.12" x2="-137.24" y2="140.58" width="0.1524" layer="91"/>
 </segment>
@@ -11997,7 +11999,7 @@ Source: www.kingbright.com</description>
 <net name="N$2" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="1"/>
-<pinref part="PWR" gate="G$1" pin="A"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="VBAT" class="0">
