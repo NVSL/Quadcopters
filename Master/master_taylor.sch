@@ -11321,6 +11321,7 @@ Source: www.kingbright.com</description>
 <wire x1="-137.16" y1="66.04" x2="-127" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="GND22" gate="1" pin="GND"/>
 <wire x1="-127" y1="66.04" x2="-127" y2="60.96" width="0.1524" layer="91"/>
+<junction x="-127" y="66.04"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="RES3"/>
@@ -11336,6 +11337,11 @@ Source: www.kingbright.com</description>
 <wire x1="-213.36" y1="27.94" x2="-213.36" y2="25.4" width="0.1524" layer="91"/>
 <pinref part="GND5" gate="1" pin="GND"/>
 <wire x1="-213.36" y1="17.78" x2="-213.36" y2="12.7" width="0.1524" layer="91"/>
+<junction x="-213.36" y="27.94"/>
+<junction x="-213.36" y="25.4"/>
+<junction x="-213.36" y="22.86"/>
+<junction x="-213.36" y="20.32"/>
+<junction x="-213.36" y="17.78"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="SA0_G"/>
@@ -11343,6 +11349,7 @@ Source: www.kingbright.com</description>
 <wire x1="-154.94" y1="35.56" x2="-154.94" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="GND23" gate="1" pin="GND"/>
 <wire x1="-154.94" y1="30.48" x2="-154.94" y2="25.4" width="0.1524" layer="91"/>
+<junction x="-154.94" y="30.48"/>
 </segment>
 <segment>
 <pinref part="GND21" gate="1" pin="GND"/>
@@ -11730,6 +11737,13 @@ Source: www.kingbright.com</description>
 <wire x1="-139.7" y1="58.42" x2="-139.7" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="-139.7" y1="63.5" x2="-149.86" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="-149.86" y1="63.5" x2="-149.86" y2="73.66" width="0.1524" layer="91"/>
+<junction x="-137.16" y="73.66"/>
+<junction x="-154.94" y="73.66"/>
+<junction x="-149.86" y="73.66"/>
+<junction x="-154.94" y="71.12"/>
+<junction x="-154.94" y="68.58"/>
+<junction x="-154.94" y="66.04"/>
+<junction x="-139.7" y="58.42"/>
 </segment>
 </net>
 <net name="DTR" class="0">
@@ -11923,11 +11937,16 @@ Source: www.kingbright.com</description>
 <pinref part="U3" gate="A" pin="E"/>
 <wire x1="-124.46" y1="243.84" x2="-124.46" y2="248.92" width="0.1524" layer="91"/>
 <wire x1="-124.46" y1="241.3" x2="-124.46" y2="243.84" width="0.1524" layer="91"/>
+<junction x="-124.46" y="243.84"/>
+<junction x="-124.46" y="248.92"/>
 </segment>
 </net>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,-223.52,269.24,U2,EN,VBAT,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
