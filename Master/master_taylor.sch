@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -10936,11 +10936,6 @@ Source: www.kingbright.com</description>
 <part name="C6" library="resistor" deviceset="C-US" device="C0805" value="12pF"/>
 <part name="GND6" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND7" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
-<part name="Y2" library="SparkFun-FreqCtrl" deviceset="CRYSTAL" device="32-SMD" value="32.768kHz"/>
-<part name="C7" library="resistor" deviceset="C-US" device="C0805" value="12pF"/>
-<part name="C8" library="resistor" deviceset="C-US" device="C0805" value="12pF"/>
-<part name="GND8" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
-<part name="GND9" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="B1" library="SparkFun-RF" deviceset="BALUN" device="0805" value="748421245"/>
 <part name="C11" library="resistor" deviceset="C-US" device="C0805" value="22pF"/>
 <part name="GND10" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
@@ -10952,13 +10947,10 @@ Source: www.kingbright.com</description>
 <part name="P+6" library="SparkFun-Aesthetics" deviceset="3.3V" device=""/>
 <part name="P+7" library="SparkFun-Aesthetics" deviceset="3.3V" device=""/>
 <part name="P+9" library="SparkFun-Aesthetics" deviceset="3.3V" device=""/>
-<part name="P+10" library="SparkFun-Aesthetics" deviceset="3.3V" device=""/>
 <part name="S1" library="SparkFun-Electromechanical" deviceset="SWITCH-MOMENTARY-2" device="SMD" value=""/>
 <part name="GND16" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="JP9" library="SparkFun-Connectors" deviceset="FTDI_BASIC" device="PTH" value="FTDI"/>
 <part name="GND25" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
-<part name="P+5" library="SparkFun-Aesthetics" deviceset="3.3V" device=""/>
-<part name="C15" library="resistor" deviceset="C-US" device="C0805" value="0.1uF"/>
 <part name="D2" library="led" deviceset="LED" device="CHIPLED_0603" value="GREEN"/>
 <part name="C9" library="resistor" deviceset="C-US" device="C0805" value="0.75pF"/>
 <part name="GND13" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
@@ -11078,14 +11070,6 @@ Source: www.kingbright.com</description>
 </instance>
 <instance part="GND6" gate="1" x="-40.72" y="138.04" rot="MR0"/>
 <instance part="GND7" gate="1" x="-50.88" y="138.04" rot="MR0"/>
-<instance part="Y2" gate="G$1" x="-139.78" y="117.72" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-141.05" y="115.434" size="1.778" layer="95" rot="MR0"/>
-<attribute name="VALUE" x="-141.304" y="117.974" size="1.778" layer="96" rot="MR0"/>
-</instance>
-<instance part="C7" gate="G$1" x="-134.7" y="110.1" rot="MR0"/>
-<instance part="C8" gate="G$1" x="-144.86" y="110.1" rot="MR0"/>
-<instance part="GND8" gate="1" x="-134.7" y="102.48" rot="MR0"/>
-<instance part="GND9" gate="1" x="-144.86" y="102.48" rot="MR0"/>
 <instance part="B1" gate="G$1" x="-15.32" y="183.76" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="-10.24" y="174.108" size="1.778" layer="96" rot="MR90"/>
 <attribute name="NAME" x="-14.05" y="189.348" size="1.778" layer="95" rot="MR0"/>
@@ -11103,13 +11087,10 @@ Source: www.kingbright.com</description>
 <instance part="P+6" gate="G$1" x="-55.96" y="204.08" rot="MR0"/>
 <instance part="P+7" gate="G$1" x="-63.58" y="204.08" rot="MR0"/>
 <instance part="P+9" gate="G$1" x="-160.14" y="210.32" rot="MR0"/>
-<instance part="P+10" gate="G$1" x="-224.08" y="159.4"/>
 <instance part="S1" gate="G$1" x="-209.14" y="152.78" rot="R270"/>
 <instance part="GND16" gate="1" x="-209.14" y="142.62"/>
 <instance part="JP9" gate="G$1" x="-234.48" y="200.26" rot="MR180"/>
 <instance part="GND25" gate="1" x="-226.86" y="187.56"/>
-<instance part="P+5" gate="G$1" x="-226.86" y="218.04"/>
-<instance part="C15" gate="G$1" x="-214.16" y="205.34" rot="R90"/>
 <instance part="D2" gate="G$1" x="-137.24" y="138.04" rot="MR0"/>
 <instance part="C9" gate="G$1" x="-0.08" y="183.76" rot="MR180"/>
 <instance part="GND13" gate="1" x="-0.08" y="173.6" rot="MR0"/>
@@ -11209,14 +11190,6 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="C6" gate="G$1" pin="2"/>
 <pinref part="GND7" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="C7" gate="G$1" pin="2"/>
-<pinref part="GND8" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="C8" gate="G$1" pin="2"/>
-<pinref part="GND9" gate="1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="AVSS_RFN"/>
@@ -11397,29 +11370,6 @@ Source: www.kingbright.com</description>
 <wire x1="-22.94" y1="163.44" x2="-22.94" y2="148.2" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$5" class="0">
-<segment>
-<pinref part="C7" gate="G$1" pin="1"/>
-<wire x1="-134.7" y1="112.64" x2="-134.7" y2="117.72" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="PG4(TOSC1)"/>
-<wire x1="-124.54" y1="117.72" x2="-134.7" y2="117.72" width="0.1524" layer="91"/>
-<pinref part="Y2" gate="G$1" pin="1"/>
-<wire x1="-137.24" y1="117.72" x2="-134.7" y2="117.72" width="0.1524" layer="91"/>
-<junction x="-134.7" y="117.72"/>
-</segment>
-</net>
-<net name="N$6" class="0">
-<segment>
-<pinref part="C8" gate="G$1" pin="1"/>
-<wire x1="-144.86" y1="112.64" x2="-144.86" y2="117.72" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="PG3(TOSC2)"/>
-<wire x1="-144.86" y1="117.72" x2="-144.86" y2="120.26" width="0.1524" layer="91"/>
-<wire x1="-144.86" y1="120.26" x2="-124.54" y2="120.26" width="0.1524" layer="91"/>
-<pinref part="Y2" gate="G$1" pin="2"/>
-<wire x1="-142.32" y1="117.72" x2="-144.86" y2="117.72" width="0.1524" layer="91"/>
-<junction x="-144.86" y="117.72"/>
-</segment>
-</net>
 <net name="RFN" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="RFN"/>
@@ -11472,11 +11422,6 @@ Source: www.kingbright.com</description>
 <pinref part="S1" gate="G$1" pin="1"/>
 <wire x1="-209.14" y1="157.86" x2="-209.14" y2="160.4" width="0.1524" layer="91"/>
 <wire x1="-209.14" y1="160.4" x2="-206.6" y2="160.4" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="C15" gate="G$1" pin="2"/>
-<label x="-209.08" y="205.34" size="1.27" layer="95" xref="yes"/>
-<junction x="-209.08" y="205.34"/>
 </segment>
 </net>
 <net name="PE4" class="0">
@@ -11683,18 +11628,6 @@ Source: www.kingbright.com</description>
 <pinref part="P+9" gate="G$1" pin="3.3V"/>
 </segment>
 <segment>
-<pinref part="J1" gate="G$1" pin="2"/>
-<wire x1="-226.62" y1="154.32" x2="-224.08" y2="154.32" width="0.1524" layer="91"/>
-<wire x1="-224.08" y1="154.32" x2="-224.08" y2="159.4" width="0.1524" layer="91"/>
-<pinref part="P+10" gate="G$1" pin="3.3V"/>
-</segment>
-<segment>
-<pinref part="JP9" gate="G$1" pin="4"/>
-<wire x1="-229.4" y1="197.72" x2="-226.86" y2="197.72" width="0.1524" layer="91"/>
-<wire x1="-226.86" y1="197.72" x2="-226.86" y2="218.04" width="0.1524" layer="91"/>
-<pinref part="P+5" gate="G$1" pin="3.3V"/>
-</segment>
-<segment>
 <pinref part="U2" gate="G$1" pin="OUT"/>
 <wire x1="-200.66" y1="279.4" x2="-185.42" y2="279.4" width="0.1524" layer="91"/>
 <pinref part="C10" gate="G$1" pin="1"/>
@@ -11749,7 +11682,6 @@ Source: www.kingbright.com</description>
 <net name="DTR" class="0">
 <segment>
 <pinref part="JP9" gate="G$1" pin="1"/>
-<pinref part="C15" gate="G$1" pin="1"/>
 <wire x1="-216.7" y1="205.34" x2="-229.4" y2="205.34" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -11939,6 +11871,20 @@ Source: www.kingbright.com</description>
 <wire x1="-124.46" y1="241.3" x2="-124.46" y2="243.84" width="0.1524" layer="91"/>
 <junction x="-124.46" y="243.84"/>
 <junction x="-124.46" y="248.92"/>
+</segment>
+</net>
+<net name="N$9" class="0">
+<segment>
+<pinref part="JP9" gate="G$1" pin="4"/>
+<wire x1="-229.4" y1="197.72" x2="-226.86" y2="197.72" width="0.1524" layer="91"/>
+<wire x1="-226.86" y1="197.72" x2="-226.86" y2="218.04" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$14" class="0">
+<segment>
+<pinref part="J1" gate="G$1" pin="2"/>
+<wire x1="-226.62" y1="154.32" x2="-224.08" y2="154.32" width="0.1524" layer="91"/>
+<wire x1="-224.08" y1="154.32" x2="-224.08" y2="159.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
