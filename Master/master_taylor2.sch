@@ -6162,22 +6162,22 @@ by exp-lbrs.ulp</description>
 <part name="GND30" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND31" library="SparkFun" deviceset="GND" device=""/>
 <part name="A1" library="SparkFun-RF" deviceset="ANTENNA2" device="SMD5"/>
-<part name="K1" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
+<part name="WING_BL" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
 <attribute name="MF" value=""/>
 <attribute name="MPN" value=""/>
 <attribute name="OC_FARNELL" value="unknown"/>
 </part>
-<part name="K2" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
+<part name="WING_BR" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
 <attribute name="MF" value=""/>
 <attribute name="MPN" value=""/>
 <attribute name="OC_FARNELL" value="unknown"/>
 </part>
-<part name="K3" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
+<part name="WING_FL" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
 <attribute name="MF" value=""/>
 <attribute name="MPN" value=""/>
 <attribute name="OC_FARNELL" value="unknown"/>
 </part>
-<part name="K4" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
+<part name="WING_FR" library="Wuerth_Elektronik_eiCan_Wire_to_Board_Connectors" deviceset="653002114822" device="">
 <attribute name="MF" value=""/>
 <attribute name="MPN" value=""/>
 <attribute name="OC_FARNELL" value="unknown"/>
@@ -6305,22 +6305,22 @@ by exp-lbrs.ulp</description>
 <instance part="GND30" gate="1" x="-147.4" y="127.88"/>
 <instance part="GND31" gate="1" x="-137.24" y="127.88"/>
 <instance part="A1" gate="G$1" x="2.46" y="199"/>
-<instance part="K1" gate="G$1" x="-88.18" y="275.16" rot="R90">
+<instance part="WING_BL" gate="G$1" x="-88.18" y="275.16" rot="R90">
 <attribute name="OC_FARNELL" x="-88.18" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MF" x="-88.18" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MPN" x="-88.18" y="275.16" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="K2" gate="G$1" x="-62.78" y="275.16" rot="R90">
+<instance part="WING_BR" gate="G$1" x="-62.78" y="275.16" rot="R90">
 <attribute name="OC_FARNELL" x="-62.78" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MF" x="-62.78" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MPN" x="-62.78" y="275.16" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="K3" gate="G$1" x="-37.38" y="275.16" rot="R90">
+<instance part="WING_FL" gate="G$1" x="-37.38" y="275.16" rot="R90">
 <attribute name="OC_FARNELL" x="-37.38" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MF" x="-37.38" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MPN" x="-37.38" y="275.16" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="K4" gate="G$1" x="-11.98" y="275.16" rot="R90">
+<instance part="WING_FR" gate="G$1" x="-11.98" y="275.16" rot="R90">
 <attribute name="OC_FARNELL" x="-11.98" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MF" x="-11.98" y="275.16" size="1.778" layer="96" display="off"/>
 <attribute name="MPN" x="-11.98" y="275.16" size="1.778" layer="96" display="off"/>
@@ -6949,14 +6949,14 @@ by exp-lbrs.ulp</description>
 <pinref part="U3" gate="A" pin="1C"/>
 <wire x1="-88.9" y1="264.16" x2="-75.48" y2="263.68" width="0.1524" layer="91"/>
 <wire x1="-75.48" y1="263.68" x2="-75.48" y2="272.62" width="0.1524" layer="91"/>
-<pinref part="K1" gate="G$1" pin="2"/>
+<pinref part="WING_BL" gate="G$1" pin="2"/>
 <wire x1="-75.48" y1="272.62" x2="-80.56" y2="272.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$30" class="0">
 <segment>
 <pinref part="U3" gate="A" pin="2C"/>
-<pinref part="K2" gate="G$1" pin="2"/>
+<pinref part="WING_BR" gate="G$1" pin="2"/>
 <wire x1="-88.9" y1="261.62" x2="-55.16" y2="261.14" width="0.1524" layer="91"/>
 <wire x1="-55.16" y1="261.14" x2="-55.16" y2="272.62" width="0.1524" layer="91"/>
 </segment>
@@ -6966,7 +6966,7 @@ by exp-lbrs.ulp</description>
 <pinref part="U3" gate="A" pin="3C"/>
 <wire x1="-88.9" y1="259.08" x2="-27.22" y2="258.6" width="0.1524" layer="91"/>
 <wire x1="-27.22" y1="258.6" x2="-27.22" y2="272.62" width="0.1524" layer="91"/>
-<pinref part="K3" gate="G$1" pin="2"/>
+<pinref part="WING_FL" gate="G$1" pin="2"/>
 <wire x1="-27.22" y1="272.62" x2="-29.76" y2="272.62" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -6975,7 +6975,7 @@ by exp-lbrs.ulp</description>
 <pinref part="U3" gate="A" pin="4C"/>
 <wire x1="-88.9" y1="256.54" x2="-1.82" y2="256.06" width="0.1524" layer="91"/>
 <wire x1="-1.82" y1="256.06" x2="-1.82" y2="272.62" width="0.1524" layer="91"/>
-<pinref part="K4" gate="G$1" pin="2"/>
+<pinref part="WING_FR" gate="G$1" pin="2"/>
 <wire x1="-1.82" y1="272.62" x2="-4.36" y2="272.62" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -7021,16 +7021,16 @@ by exp-lbrs.ulp</description>
 <wire x1="-27.22" y1="292.94" x2="-52.62" y2="292.94" width="0.1524" layer="91"/>
 <wire x1="-52.62" y1="292.94" x2="-78.02" y2="292.94" width="0.1524" layer="91"/>
 <wire x1="-78.02" y1="292.94" x2="-78.02" y2="277.7" width="0.1524" layer="91"/>
-<pinref part="K1" gate="G$1" pin="1"/>
+<pinref part="WING_BL" gate="G$1" pin="1"/>
 <wire x1="-78.02" y1="277.7" x2="-80.56" y2="277.7" width="0.1524" layer="91"/>
-<pinref part="K2" gate="G$1" pin="1"/>
+<pinref part="WING_BR" gate="G$1" pin="1"/>
 <wire x1="-55.16" y1="277.7" x2="-52.62" y2="277.7" width="0.1524" layer="91"/>
 <wire x1="-52.62" y1="277.7" x2="-52.62" y2="292.94" width="0.1524" layer="91"/>
-<pinref part="K3" gate="G$1" pin="1"/>
+<pinref part="WING_FL" gate="G$1" pin="1"/>
 <wire x1="-29.76" y1="277.7" x2="-27.22" y2="277.7" width="0.1524" layer="91"/>
 <wire x1="-27.22" y1="277.7" x2="-27.22" y2="292.94" width="0.1524" layer="91"/>
 <wire x1="-1.82" y1="277.7" x2="-1.82" y2="292.94" width="0.1524" layer="91"/>
-<pinref part="K4" gate="G$1" pin="1"/>
+<pinref part="WING_FR" gate="G$1" pin="1"/>
 <wire x1="-4.36" y1="277.7" x2="-1.82" y2="277.7" width="0.1524" layer="91"/>
 <junction x="-27.22" y="292.94"/>
 <junction x="-52.62" y="292.94"/>
