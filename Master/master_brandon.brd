@@ -146,6 +146,8 @@
 <wire x1="76.828" y1="57.802" x2="0" y2="57.802" width="0" layer="20"/>
 <wire x1="0" y1="57.802" x2="0" y2="-2.54" width="0" layer="20"/>
 <text x="41.3" y="40.4" size="6.4516" layer="21">BMW</text>
+<dimension x1="0" y1="57.802" x2="76.828" y2="57.802" x3="38.414" y3="62.886259375" textsize="1.778" layer="20" unit="inch"/>
+<dimension x1="76.828" y1="57.802" x2="76.828" y2="-2.54" x3="82.53536875" y3="27.631" textsize="1.778" layer="20" unit="inch"/>
 </plain>
 <libraries>
 <library name="SparkFun-RF">
