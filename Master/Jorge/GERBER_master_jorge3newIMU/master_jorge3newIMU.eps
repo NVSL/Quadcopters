@@ -1,0 +1,187 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: EAGLE Drawing C:/Users/Jorge/Documents/GitHub/Quadcopters/Master/Jorge/master_jorge3newIMU.brd
+%%Creator: EAGLE
+%%Pages: 1
+%%BoundingBox: 0 0 356 253
+%%EndComments
+
+% Coordinate transfer:
+
+/EU { 254 div 0.072 mul } def
+/inch { 72 mul } def
+
+% Linestyle:
+
+1 setlinecap
+1 setlinejoin
+
+% Drawing functions:
+
+/l {  % draw a line
+   /lw exch def
+   /y2 exch def
+   /x2 exch def
+   /y1 exch def
+   /x1 exch def
+   newpath
+   x1 EU y1 EU moveto
+   x2 EU y2 EU lineto
+   lw EU setlinewidth
+   stroke
+   } def
+
+/h {  % draw a hole
+   /d  exch def
+   /y  exch def
+   /x  exch def
+   d 0 gt {
+     newpath
+     x EU y EU d 2 div EU 0 360 arc
+     currentgray dup
+     1 exch sub setgray
+     fill
+     setgray
+     } if
+   } def
+
+/b {  % draw a bar
+   /an exch def
+   /y2 exch def
+   /x2 exch def
+   /y1 exch def
+   /x1 exch def
+   /w2 x2 x1 sub 2 div EU def
+   /h2 y2 y1 sub 2 div EU def
+   gsave
+   x1 x2 add 2 div EU y1 y2 add 2 div EU translate
+   an rotate
+   newpath
+   w2     h2     moveto
+   w2 neg h2     lineto
+   w2 neg h2 neg lineto
+   w2     h2 neg lineto
+   closepath
+   fill
+   grestore
+   } def
+
+/c {  % draw a circle
+   /lw exch def
+   /rd exch def
+   /y  exch def
+   /x  exch def
+   newpath
+   lw EU setlinewidth
+   x EU y EU rd EU 0 360 arc
+   stroke
+   } def
+
+/a {  % draw an arc
+   /lc exch def
+   /ae exch def
+   /as exch def
+   /lw exch def
+   /rd exch def
+   /y  exch def
+   /x  exch def
+   lw rd 2 mul gt {
+     /rd rd lw 2 div add 2 div def
+     /lw rd 2 mul def
+     } if
+   currentlinecap currentlinejoin
+   lc setlinecap 0 setlinejoin
+   newpath
+   lw EU setlinewidth
+   x EU y EU rd EU as ae arc
+   stroke
+   setlinejoin setlinecap
+   } def
+
+/p {  % draw a pie
+   /d exch def
+   /y exch def
+   /x exch def
+   newpath
+   x EU y EU d 2 div EU 0 360 arc
+   fill
+   } def
+
+/edge { 0.20710678119 mul } def
+
+/o {  % draw an octagon
+   /an exch def
+   /dy exch def
+   /dx exch def
+   /y  exch def
+   /x  exch def
+   gsave
+   x EU y EU translate
+   an dx dy lt { 90 add /dx dy /dy dx def def } if rotate
+   newpath
+      0 dx 2 div sub EU                    0 dy edge  add EU moveto
+      0 dx dy sub 2 div sub dy edge sub EU 0 dy 2 div add EU lineto
+      0 dx dy sub 2 div add dy edge add EU 0 dy 2 div add EU lineto
+      0 dx 2 div add EU                    0 dy edge  add EU lineto
+      0 dx 2 div add EU                    0 dy edge  sub EU lineto
+      0 dx dy sub 2 div add dy edge add EU 0 dy 2 div sub EU lineto
+      0 dx dy sub 2 div sub dy edge sub EU 0 dy 2 div sub EU lineto
+      0 dx 2 div sub EU                    0 dy edge  sub EU lineto
+   closepath
+   fill
+   grestore
+   } def
+
+416391 327491 787231 327491 0 l
+825331 365591 825331 646769 0 l
+378291 365591 378291 647023 0 l
+416391 685021 787231 685021 0 l
+960205 825331 942171 825331 0 l
+911944 825077 30227 0 90.48 360.00 1 a
+911691 874099 911691 855303 0 l
+942171 825331 942171 825077 0 l
+911437 874099 863431 855049 0 l
+960205 825331 941155 777325 0 l
+787231 685123 863431 809583 0 l
+863431 809583 863431 855049 0 l
+941155 777325 905341 777325 0 l
+825331 646769 905341 777325 0 l
+243417 825585 261451 825585 0 l
+291677 825331 30227 0 180.00 449.52 1 a
+291931 874353 291931 855557 0 l
+261451 825585 261451 825331 0 l
+292185 874353 340191 855303 0 l
+243417 825585 262467 777579 0 l
+416391 685377 340191 809837 0 l
+340191 809837 340191 855303 0 l
+262467 777579 298281 777579 0 l
+378291 647023 298281 777579 0 l
+243417 187029 261451 187029 0 l
+291677 187282 30227 0 270.48 540.00 1 a
+291931 138261 291931 157057 0 l
+261451 187029 261451 187283 0 l
+292185 138261 340191 157311 0 l
+243417 187029 262467 235035 0 l
+416391 327237 340191 202777 0 l
+340191 202777 340191 157311 0 l
+262467 235035 298281 235035 0 l
+378291 365591 298281 235035 0 l
+416391 327237 416391 327491 0 l
+959951 187283 941917 187283 0 l
+911690 187536 30227 0 0.00 269.52 1 a
+911437 138515 911437 157311 0 l
+941917 187283 941917 187537 0 l
+911183 138515 863177 157565 0 l
+959951 187283 940901 235289 0 l
+786977 327491 863177 203031 0 l
+863177 203031 863177 157565 0 l
+940901 235289 905087 235289 0 l
+825077 365845 905087 235289 0 l
+416391 684869 416391 685377 0 l
+911691 874099 911437 874099 0 l
+911437 138515 911183 138515 0 l
+291931 138261 292185 138261 0 l
+291931 874353 292185 874353 0 l
+337905 245449 10000 0 c
+865463 245703 10000 0 c
+338159 766911 10000 0 c
+864701 767165 10000 0 c
