@@ -4,12 +4,12 @@
 #if defined(MMA7455) || defined(MMA8451Q) || defined(ADXL345) || \
     defined(BMA180) || defined(BMA280) || defined(BMA020) || defined(NUNCHACK) || \
     defined(LIS3LV02) || defined(LSM303DLx_ACC) || defined(ADCACC) || \
-    defined(MPU6050) || defined(LSM330) || defined(NUNCHUCK) || defined(LSM303DLHC_ACC) || defined(LSM303D_ACC)
+    defined(MPU6050) || defined(LSM330) || defined(NUNCHUCK) || defined(LSM303DLHC_ACC) || defined(LSM303D_ACC) || defined(LSM9DS0_ACC)
 void ACC_getADC ();
 #endif
 
 #if defined(L3G4200D) || defined(ITG3200) || defined(MPU6050) || defined(LSM330) || \
-    defined(MPU3050) || defined(WMP) || defined(NUNCHUCK) || defined(L3GD20)
+    defined(MPU3050) || defined(WMP) || defined(NUNCHUCK) || defined(L3GD20) || defined(LSM9DS0_GYRO)
 void Gyro_getADC ();
 #endif
 

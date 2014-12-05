@@ -166,6 +166,7 @@
       //#define MPU6050       //combo + ACC
       //#define LSM330        //combo + ACC
       // #define L3GD20
+         #define LSM9DS0_GYRO
       
       /* I2C accelerometer */
       //#define NUNCHUCK  // if you want to use the nunckuk connected to a WMP
@@ -179,7 +180,8 @@
       // #define LSM303DLx_ACC
       //#define MMA8451Q
       // #define LSM303DLHC_ACC
-      #define LSM303D_ACC
+      // #define LSM303D_ACC
+       #define LSM9DS0_ACC
 
       /* I2C barometer */
       //#define BMP085

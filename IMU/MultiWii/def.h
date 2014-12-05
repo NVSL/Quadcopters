@@ -1591,7 +1591,7 @@
 /***************              Sensor Type definitions              ********************/
 /**************************************************************************************/
 
-#if defined(ADXL345) || defined(BMA020) || defined(BMA180) || defined(BMA280) || defined(NUNCHACK) || defined(MMA7455) || defined(ADCACC) || defined(LIS3LV02) || defined(LSM303DLx_ACC) || defined(LSM303DLHC_ACC) || defined(LSM303D_ACC) || defined(MPU6050) || defined(LSM330) || defined(MMA8451Q) || defined(NUNCHUCK)
+#if defined(ADXL345) || defined(BMA020) || defined(BMA180) || defined(BMA280) || defined(NUNCHACK) || defined(MMA7455) || defined(ADCACC) || defined(LIS3LV02) || defined(LSM303DLx_ACC) || defined(LSM303DLHC_ACC) || defined(LSM303D_ACC) || defined(MPU6050) || defined(LSM330) || defined(MMA8451Q) || defined(NUNCHUCK) || defined(LSM9DS0_ACC)
   #define ACC 1
 #else
   #define ACC 0
@@ -1603,7 +1603,7 @@
   #define MAG 0
 #endif
 
-#if defined(ITG3200) || defined(L3G4200D) || defined(MPU6050) || defined(LSM330) || defined(MPU3050) || defined(WMP) || defined(L3GD20)
+#if defined(ITG3200) || defined(L3G4200D) || defined(MPU6050) || defined(LSM330) || defined(MPU3050) || defined(WMP) || defined(L3GD20) || defined(LSM9DS0_GYRO)
   #define GYRO 1
 #else
   #define GYRO 0
@@ -1702,10 +1702,10 @@
 #if defined(WMP)
   #define GYRO_SCALE (1.0f/200e6f)
 #endif
-#if defined(L3GD20)
+#if defined(L3GD20) || defined(LSM9DS0_GYRO)
   #define GYRO_SCALE ((70.0f * PI) / (180.0f * 1000000.0f * 1000.0f))
 #endif
-#define GYRO_SCALE 1
+
 
 /**************************************************************************************/
 /***************      Multitype decleration for the GUI's          ********************/

@@ -1062,6 +1062,28 @@ void ACC_getADC () {
 #endif
 
 
+// ************************************************************************************************************
+// LSM9DS0 I2C Accelerometer
+// I2C adress: 0x3B (8bit)
+// ************************************************************************************************************
+#if defined(LSM9DS0_ACC)
+#define LSM9DS0_ACC_ADR  0x3B >> 1 // I2C accelerometer address 
+void ACC_init () {
+  i2c_writeReg(LSM9DS0_ACC_ADR,0x20,0x57);   // 50Hz data rate, XYZ enable
+}
+
+void ACC_getADC () {  
+  TWBR = ((F_CPU / 100000L) - 16) / 2; //100 kHz clock
+  i2c_getSixRawADC(LSM9DS0_ACC_ADR,0x28 | 0x80);
+
+ ACC_ORIENTATION( ((rawADC[1]<<8) | rawADC[0])>>4 ,
+                  ((rawADC[3]<<8) | rawADC[2])>>4 ,
+                  ((rawADC[5]<<8) | rawADC[4])>>4 );
+
+  ACC_Common();
+}
+#endif
+
 
 
 // ************************************************************************************************************
@@ -1128,6 +1150,29 @@ void Gyro_getADC(){
 }
 
 #endif
+
+
+// ************************************************************************************************************
+// I2C Gyroscope LSM9DS0
+// ************************************************************************************************************
+#if defined(LSM9DS0_GYRO)
+#define LSM9DS0_GYRO_ADR 0xD6 >> 1  //I2C address, minus the last bit (write/read)
+void Gyro_init(){
+  i2c_writeReg(LSM9DS0_GYRO_ADR, 0x20, 0x0F);   //Ctrl reg 1: 100Hz, normal power, XYZ enable
+  i2c_writeReg(LSM9DS0_GYRO_ADR, 0x23, 0x30);   //2000 dps scale
+}
+
+void Gyro_getADC(){
+  TWBR = ((F_CPU / 100000L) - 16) / 2;  //100 kHz clock
+  i2c_getSixRawADC(LSM9DS0_GYRO_ADR, 0x28 | 0x80);
+  GYRO_ORIENTATION( ((rawADC[1]<<8) | rawADC[0]) ,
+                    ((rawADC[3]<<8) | rawADC[2]) ,
+                    ((rawADC[5]<<8) | rawADC[4]) );
+  GYRO_Common();
+}
+
+#endif
+
 
 
 // ************************************************************************************************************

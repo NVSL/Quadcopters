@@ -7375,6 +7375,9 @@ by exp-lbrs.ulp</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,-223.52,269.24,U2,EN,VBAT,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
