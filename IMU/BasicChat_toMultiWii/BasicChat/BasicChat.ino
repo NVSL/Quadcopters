@@ -22,6 +22,7 @@ union {
     uint16_t AUX4;
   } 
   m;
+  uint16_t rc_channels[8];
   char buff[sizeof(struct stick)];
 } 
 stick_struct;
@@ -153,7 +154,7 @@ void setup()
   // Add your initialization code here
   Serial.begin(9600);  // Start up serial
   Serial1.begin(9600); // Start up serial1 -- used for debug.
-  rfBegin(11);  // Initialize ATmega128RFA1 radio on channel 11 (can be 11-26)
+  rfBegin(21);  // Initialize ATmega128RFA1 radio on channel 11 (can be 11-26)
 
   //Initialize values with some data
   stick_struct.m.ROLL = 1500;
@@ -167,36 +168,51 @@ void setup()
 }
 
 unsigned long lastMillis = 0;
+uint16_t stick_values[8];
 
 // The loop function is called in an endless loop
 void loop()
 {
   if(buttonWait(7,2000))
     calibrate();
-    
 
-  if(abs(millis()  - lastMillis) > 200){
+
+  if(abs(millis()  - lastMillis) > 150){
     lastMillis = millis();
     lcd.setCursor(0,0);
     lcd.print("                    ");
     for(int i=0;i<4;i++){
       lcd.setCursor(0,i*5);
-      int val = analogRead(CH_PINS[i]);
-      int low,high;
-      if(CH_SWAPPED[i]){
-        low = CH_HIGHS[i];
-        high = CH_LOWS[i];
-      }
-      else{
-        low = CH_LOWS[i];
-        high=CH_HIGHS[i];
-      }
-      val = map(val,low,high,1000,2000);
-      lcd.print(val);
+      lcd.print(stick_struct.rc_channels[i]);
     }
-  }    
+    lcd.setCursor(1,0);
+    lcd.print("ROLL PITC YAW  THRO");
+  }  
+
+
+  for(int i=0;i<4;i++){
+    int val = analogRead(CH_PINS[i]);
+    int low,high;
+    if(CH_SWAPPED[i]){
+      low = CH_HIGHS[i];
+      high = CH_LOWS[i];
+    }
+    else{
+      low = CH_LOWS[i];
+      high=CH_HIGHS[i];
+    }
+    val = map(val,low,high,1000,2000);
+    stick_struct.rc_channels[i] = val;
+  }
+
+
+  if(digitalRead(6)){
+    rfPrint("sup");
+  }
+
 
   // Get the values from the joysticks ...
+
 
   // Copy the values to transmit buffer
   memcpy(&txData[0], stick_struct.buff, sizeof(stick_struct));
@@ -206,42 +222,43 @@ void loop()
   rfPrint(txData);
 
   // Wait, don't send data each loop
-  delay(1000);
 
   if (rfAvailable())  // This is what Im going to receive
   {
-    strcpy(rxData, rfRead());
-
-    //Check if at least there is enough data.
-    if(strlen(rxData) >= sizeof(stick_struct)) {
-
-      // Pass data to multiwii motors array
-      memcpy(rcData, rxData, sizeof(stick_struct));
-
-      // Print received data
-      sprintf(tmpBuf, "ROLL = %i \n\r", rcData[0]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "PTICH = %i \n\r", rcData[1]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "YAW = %i \n\r", rcData[2]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "THROTTLE = %i \n\r", rcData[3]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "AUX1 = %i \n\r", rcData[4]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "AUX2 = %i \n\r", rcData[5]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "AUX3 = %i \n\r", rcData[6]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-      sprintf(tmpBuf, "AUX4 = %i \n\r", rcData[7]);
-      Serial.print(tmpBuf);  // ... send it out serial.
-    } 
-    else {
-      Serial.print("Error data size is incorrect \n\r");
-    }
+    Serial.print("a");
+    //    strcpy(rxData, rfRead());
+    //
+    //    //Check if at least there is enough data.
+    //    if(strlen(rxData) >= sizeof(stick_struct)) {
+    //
+    //      // Pass data to multiwii motors array
+    //      memcpy(rcData, rxData, sizeof(stick_struct));
+    //
+    //      // Print received data
+    //      sprintf(tmpBuf, "ROLL = %i \n\r", rcData[0]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "PTICH = %i \n\r", rcData[1]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "YAW = %i \n\r", rcData[2]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "THROTTLE = %i \n\r", rcData[3]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "AUX1 = %i \n\r", rcData[4]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "AUX2 = %i \n\r", rcData[5]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "AUX3 = %i \n\r", rcData[6]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //      sprintf(tmpBuf, "AUX4 = %i \n\r", rcData[7]);
+    //      Serial.print(tmpBuf);  // ... send it out serial.
+    //    } 
+    //    else {
+    //      Serial.print("Error data size is incorrect \n\r");
+    //    }
   }
 
 
 }
+
 
 
