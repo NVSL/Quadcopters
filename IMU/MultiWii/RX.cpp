@@ -567,7 +567,7 @@ void computeRC() {
 
 	//Data comes from the ATMEGA128RF internal transceiver
 	if(rfAvailable()>=RC_CHANS*sizeof(int16_t)) {
-		memcpy(rcData, rfRead(), RC_CHANS*sizeof(int16_t));   //TODO: rfRead() just returns a byte, can't memcpy that
+		memcpy(rcData, rfRead(), RC_CHANS*sizeof(int16_t));
 	}
 
 	// rcData comes from MSP and overrides RX Data until rcSerialCount reaches 0
