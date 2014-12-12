@@ -200,7 +200,7 @@ void loop()
       }
       else{
         low = CH_LOWS[i];
-        high=CH_HIGHS[i];
+        high = CH_HIGHS[i];
       }
       val = map(val,low,high,1000,2000);
       lcd.print(val);

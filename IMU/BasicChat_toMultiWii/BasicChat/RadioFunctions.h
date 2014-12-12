@@ -65,7 +65,7 @@ uint8_t rfBegin(uint8_t channel)
   // to Energy Above Threshold Mode.
   // Channel should be between 11 and 26 (2405 MHz to 2480 MHz)
   if ((channel < 11) || (channel > 26)) channel = 11;
-  PHY_CC_CCA = (PHY_CC_CCA & 0xE0) | 11; // Set the channel to 11
+  PHY_CC_CCA = (PHY_CC_CCA & 0xE0) | channel; // Set the channel to 11
 
   // Finally, we'll enter into the RX_ON state. Now waiting for radio RX's, unless
   // we go into a transmitting state.
@@ -76,10 +76,11 @@ uint8_t rfBegin(uint8_t channel)
 
 // This function sends a string of characters out of the radio.
 // Given a string, it'll format a frame, and send it out.
-void rfPrint(char * toPrint)
+void rfPrint(char * toPrint, int length=-1)
 {
   uint8_t frame[RF_BUFFER_SIZE];  // We'll need to turn the string into an arry
-  int length = strlen(toPrint);  // Get the length of the string
+  if(length==-1)
+    length = strlen(toPrint);  // Get the length of the string
 
   // Cut the data if length is > 126, return.
   if(length > RF_BUFFER_SIZE-2)
@@ -168,3 +169,5 @@ ISR(TRX24_RX_END_vect)
 
   digitalWrite(RX_LED, LOW);  // Turn receive LED off, and we're out
 }
+
+

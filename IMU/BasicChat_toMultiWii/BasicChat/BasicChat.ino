@@ -164,7 +164,7 @@ void setup()
   stick_struct.m.AUX1 = 1800;
   stick_struct.m.AUX2 = 1900;
   stick_struct.m.AUX3 = 2000;
-  stick_struct.m.AUX4 = 2100;
+  stick_struct.m.AUX4 = 2000;
 }
 
 unsigned long lastMillis = 0;
@@ -202,14 +202,13 @@ void loop()
       high=CH_HIGHS[i];
     }
     val = map(val,low,high,1000,2000);
-    stick_struct.rc_channels[i] = val;
+//    stick_struct.rc_channels[i] = val;
   }
 
 
   if(digitalRead(6)){
     rfPrint("sup");
   }
-
 
   // Get the values from the joysticks ...
 
@@ -219,13 +218,13 @@ void loop()
   txData[sizeof(stick_struct)]='\0';
 
   // Send Data in a serial format with null end
-  rfPrint(txData);
+  rfPrint(txData, sizeof(stick_struct));
+  delay(100);
 
   // Wait, don't send data each loop
-
-  if (rfAvailable())  // This is what Im going to receive
-  {
-    Serial.print("a");
+//
+//  if (rfAvailable())  // This is what Im going to receive
+//  {
     //    strcpy(rxData, rfRead());
     //
     //    //Check if at least there is enough data.
@@ -255,7 +254,7 @@ void loop()
     //    else {
     //      Serial.print("Error data size is incorrect \n\r");
     //    }
-  }
+//  }
 
 
 }
