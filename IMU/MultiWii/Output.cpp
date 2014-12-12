@@ -531,7 +531,7 @@ void initOutput() {
   #endif
   
   /********  Specific PWM Timers & Registers for the atmega328P (Promini)   ************/
-  #if defined(PROMINI)
+  #if defined(PROMINI) || defined(ATMEGA128RF)
     #if (NUMBER_MOTOR > 0)
       TCCR1A |= _BV(COM1A1); // connect pin 8 to timer (OCR1A) channel A
     #endif

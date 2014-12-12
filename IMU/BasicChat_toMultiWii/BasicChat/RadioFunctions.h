@@ -153,7 +153,7 @@ ISR(TRX24_RX_END_vect)
   uint8_t frame_checksum;
 
   // The received signal must be above a certain threshold.
-  if (rssiRaw & RX_CRC_VALID)
+  if (PHY_RSSI & (1<<RX_CRC_VALID))
   {
     // The length of the message will be the first byte received.
     length = TST_RX_LENGTH;

@@ -202,7 +202,7 @@ void loop()
       high=CH_HIGHS[i];
     }
     val = map(val,low,high,1000,2000);
-//    stick_struct.rc_channels[i] = val;
+    stick_struct.rc_channels[i] = val;
   }
 
 
@@ -219,7 +219,6 @@ void loop()
 
   // Send Data in a serial format with null end
   rfPrint(txData, sizeof(stick_struct));
-  delay(100);
 
   // Wait, don't send data each loop
 //

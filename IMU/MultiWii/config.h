@@ -60,11 +60,11 @@
     //#define MINTHROTTLE 1120 // for Super Simple ESCs 10A
     //#define MINTHROTTLE 1064 // special ESC (simonk)
     //#define MINTHROTTLE 1050 // for brushed ESCs like ladybird
-    #define MINTHROTTLE 1150 // (*) (**)
+    #define MINTHROTTLE 1050 // (*) (**)
 
   /****************************    Motor maxthrottle    *******************************/
     /* this is the maximum value for the ESCs at full power, this value can be increased up to 2000 */
-    #define MAXTHROTTLE 1850
+    #define MAXTHROTTLE 1950
 
   /****************************    Mincommand          *******************************/
     /* this is the value for the ESCs when they are not armed
@@ -374,7 +374,7 @@
 	/**********************    ATmega128RF receiver    *******************************/
 	/* This receiver is only for the ATmega128RFxx family which have internally a 2.4Ghz receiver*/
 	#define ATMEGA128RF
-	#define ATMEGA128RF_CHANNEL	11	//This channel should be only between 11 and 26
+	#define ATMEGA128RF_CHANNEL	21	//This channel should be only between 11 and 26
 
 
 /*************************************************************************************************/
