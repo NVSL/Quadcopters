@@ -147,8 +147,8 @@ void loop()
 
     } 
     else {
-      Serial.print("Error data size is incorrect: ");
-      Serial.println(rfAvailable());
+//      Serial.print("Error data size is incorrect: ");
+//      Serial.println(rfAvailable());
     }
   }
 }
