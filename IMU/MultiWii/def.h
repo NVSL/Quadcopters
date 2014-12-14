@@ -1706,6 +1706,10 @@
   #define GYRO_SCALE ((70.0f * PI) / (180.0f * 1000000.0f * 1000.0f))
 #endif
 
+#ifndef GYRO_SCALE
+  #define GYRO_SCALE 1
+#endif
+
 
 /**************************************************************************************/
 /***************      Multitype decleration for the GUI's          ********************/
