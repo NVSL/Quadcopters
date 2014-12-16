@@ -154,7 +154,7 @@ void configureReceiver() {
 	// This register is used to set the channel. CCA_MODE should default
 	// to Energy Above Threshold Mode.
 	// Channel should be between 11 and 26 (2405 MHz to 2480 MHz)
-	PHY_CC_CCA = (PHY_CC_CCA & 0xE0) | ATMEGA128RF_CHANNEL; // Set the channel to 11
+	PHY_CC_CCA = (PHY_CC_CCA & 0xE0) | ATMEGA128RF_CHANNEL; // Set the channel
 
 	// Finally, we'll enter into the RX_ON state. Now waiting for radio RX's, unless
 	// we go into a transmitting state.
@@ -445,10 +445,9 @@ void readSpektrum(void) {
 
 // This function sends a string of characters out of the radio.
 // Given a string, it'll format a frame, and send it out.
-void rfPrint(char * toPrint)
+void rfPrint(char * toPrint, unsigned char length)
 {
   uint8_t frame[RF_BUFFER_SIZE];  // We'll need to turn the string into an arry
-  int length = strlen(toPrint);  // Get the length of the string
 
   // Cut the data if length is > 126, return.
   if(length > RF_BUFFER_SIZE-2)

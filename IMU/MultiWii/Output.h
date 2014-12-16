@@ -7,5 +7,6 @@ void initOutput();
 void mixTable();
 void writeServos();
 void writeMotors();
+void writeAllMotors(int16_t mc);
 
 #endif /* OUTPUT_H_ */
