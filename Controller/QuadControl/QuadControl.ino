@@ -183,7 +183,7 @@ void loop()
     pos = (pos + 1)%20;
   }
 
-  if(buttonWait(7,2000))`
+  if(buttonWait(7,2000))
     calibrate();
 
   if(abs(millis()  - lastMillis) > 200){

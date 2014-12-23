@@ -376,7 +376,6 @@ void writeMotors() { // [1000;2000] => [125;250]
   #if defined(PROMINI)	//Values where modified to drive brushed. Values go from 0 to 250
     #if (NUMBER_MOTOR > 0)
       #ifndef EXT_MOTOR_RANGE 
-        if(motor[0] <= 1520) motor[0] = 1000;
         OCR1A = (motor[0] - 1000)>>2; //  pin 8
       #else
         OCR1A = ((motor[0]>>2) - 250);
@@ -384,7 +383,6 @@ void writeMotors() { // [1000;2000] => [125;250]
     #endif
     #if (NUMBER_MOTOR > 1)
       #ifndef EXT_MOTOR_RANGE
-        if(motor[1] <= 1520) motor[1] = 1000;
         OCR2A = (motor[1] - 1000)>>2; //  pin 9
       #else
         OCR1B = ((motor[1]>>2) - 250);
@@ -392,7 +390,6 @@ void writeMotors() { // [1000;2000] => [125;250]
     #endif
     #if (NUMBER_MOTOR > 2)
       #ifndef EXT_MOTOR_RANGE
-        if(motor[2] <= 1520) motor[2] = 1000;
         OCR3A = (motor[2] - 1000)>>2; //  pin 3
       #else
         OCR2A = ((motor[2]>>2) - 250);
@@ -400,7 +397,6 @@ void writeMotors() { // [1000;2000] => [125;250]
     #endif
     #if (NUMBER_MOTOR > 3)
       #ifndef EXT_MOTOR_RANGE
-        if(motor[3] <= 1520) motor[3] = 1000;
         OCR3B = (motor[3]-1000)>>2; //  pin 4
       #else
         OCR2B = ((motor[3]>>2) - 250);
