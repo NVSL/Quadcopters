@@ -382,7 +382,7 @@ void writeMotors() { // [1000;2000] => [125;250]
       #endif
     #endif
     #if (NUMBER_MOTOR > 1)
-      #ifndef EXT_MOTOR_RANGE 
+      #ifndef EXT_MOTOR_RANGE
         OCR2A = (motor[1] - 1000)>>2; //  pin 9
       #else
         OCR1B = ((motor[1]>>2) - 250);

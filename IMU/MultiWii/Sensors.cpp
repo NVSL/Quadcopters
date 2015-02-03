@@ -1067,8 +1067,8 @@ void ACC_getADC () {
 // I2C adress: 0x3B (8bit)
 // ************************************************************************************************************
 #if defined(LSM9DS0_ACC)
-#define LSM9DS0_ACC_ADR  (0x3B >> 1) // I2C accelerometer address -- this is for the Adafruit LSM9DS0 breakout board
-// #define LSM9DS0_ACC_ADR  (0x3D >> 1) // I2C accelerometer address  -- this is if you're using the same layout as master_taylor2.brd
+//#define LSM9DS0_ACC_ADR  (0x3B >> 1) // I2C accelerometer address -- this is for the Adafruit LSM9DS0 breakout board
+#define LSM9DS0_ACC_ADR  (0x3D >> 1) // I2C accelerometer address  -- this is if you're using the same layout as master_taylor2.brd
 void ACC_init () {
   i2c_writeReg(LSM9DS0_ACC_ADR,0x20,0x57);   // 50Hz data rate, XYZ enable
 }
@@ -1156,8 +1156,8 @@ void Gyro_getADC(){
 // I2C Gyroscope LSM9DS0
 // ************************************************************************************************************
 #if defined(LSM9DS0_GYRO)
-// #define LSM9DS0_GYRO_ADR (0xD5 >> 1)  //I2C address, minus the last bit (write/read) -- This is for the master_taylor2.brd layout
-#define LSM9DS0_GYRO_ADR (0xD6 >> 1)  //I2C address, minus the last bit (write/read) -- This is for Adafruit's LSM9DS0 breakout board
+#define LSM9DS0_GYRO_ADR (0xD5 >> 1)  //I2C address, minus the last bit (write/read) -- This is for the master_taylor2.brd layout
+//#define LSM9DS0_GYRO_ADR (0xD6 >> 1)  //I2C address, minus the last bit (write/read) -- This is for Adafruit's LSM9DS0 breakout board
 void Gyro_init(){
   i2c_writeReg(LSM9DS0_GYRO_ADR, 0x20, 0x0F);   //Ctrl reg 1: 100Hz, normal power, XYZ enable
   i2c_writeReg(LSM9DS0_GYRO_ADR, 0x23, 0x30);   //2000 dps scale

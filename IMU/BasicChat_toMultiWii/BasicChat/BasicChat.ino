@@ -37,9 +37,9 @@ int16_t rcData[RC_CHANS];
 int CH_PINS[] = {
   A0,A1,A2,A3};
 unsigned int CH_LOWS[] = {
-  270,254,665,713};   //Lowest analogRead value: pushing sticks down or left
+  0,0,0,0};   //Lowest analogRead value: pushing sticks down or left
 unsigned int CH_HIGHS[] = {
-  892,780,57,183};  //Highest value
+  1023,1023,1023,1023};  //Highest value
 byte CH_SWAPPED[] = {
   0,0,1,1};   //Gimbal values are reversed for some reason
 unsigned int ADDR_START = 1337;

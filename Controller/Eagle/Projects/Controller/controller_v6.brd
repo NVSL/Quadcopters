@@ -182,6 +182,25 @@
 <wire x1="10" y1="81.5" x2="10" y2="75" width="0" layer="20"/>
 <wire x1="10" y1="75" x2="0" y2="75" width="0" layer="20"/>
 <wire x1="30" y1="81.5" x2="30" y2="33.5" width="0" layer="20" curve="-180" cap="flat"/>
+<text x="142.4" y="61.8" size="1.778" layer="21" rot="R90">GND</text>
+<text x="137.15" y="62" size="1.778" layer="21" rot="R90">VDD</text>
+<text x="132.25" y="63.7" size="1.778" layer="21" rot="R90">RX</text>
+<text x="134.65" y="63.9" size="1.778" layer="21" rot="R90">TX</text>
+<text x="119.5" y="67.75" size="1.016" layer="21">MISO (1)</text>
+<text x="119.85" y="63.4" size="1.016" layer="21">3.3V (2)</text>
+<text x="106.75" y="63.55" size="1.016" layer="21">GND (6)</text>
+<text x="103.35" y="66.15" size="1.016" layer="21">RESET_N (5)</text>
+<text x="134.5" y="93.95" size="1.016" layer="21" rot="R90">ADC7</text>
+<text x="137.05" y="93.9" size="1.016" layer="21" rot="R90">ADC6</text>
+<text x="139.55" y="93.9" size="1.016" layer="21" rot="R90">ADC5</text>
+<text x="142.3" y="93.85" size="1.016" layer="21" rot="R90">ADC4</text>
+<text x="115.2" y="94.1" size="1.016" layer="21" rot="R90">RESET_OUT</text>
+<text x="112.65" y="94.05" size="1.016" layer="21" rot="R90">PG0</text>
+<text x="110.15" y="94.05" size="1.016" layer="21" rot="R90">PG1</text>
+<text x="107.35" y="94.1" size="1.016" layer="21" rot="R90">PG2</text>
+<text x="88.4" y="49.45" size="1.016" layer="21">GND</text>
+<text x="88.6" y="40.65" size="1.016" layer="21">VDD</text>
+<text x="129.75" y="88.45" size="1.016" layer="21">* is PIN 1 (ADC1)</text>
 </plain>
 <libraries>
 <library name="Controller">

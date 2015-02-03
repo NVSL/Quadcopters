@@ -291,8 +291,8 @@
   #if defined(RCAUXPIN12)
     #define RCAUXPIN
   #endif
-  #define I2C_PULLUPS_ENABLE         PORTC |= 1<<4; PORTC |= 1<<5;   // PIN A4&A5 (SDA&SCL)
-  #define I2C_PULLUPS_DISABLE        PORTC &= ~(1<<4); PORTC &= ~(1<<5);
+  #define I2C_PULLUPS_ENABLE         PORTD |= 1<<0; PORTD |= 1<<1;   // PIN D0&D1 (SDA&SCL)
+  #define I2C_PULLUPS_DISABLE        PORTD &= ~(1<<0); PORTD &= ~(1<<1);
   #if !defined(MONGOOSE1_0)
     #define PINMODE_LCD                pinMode(0, OUTPUT);
     #define LCDPIN_OFF                 PORTD &= ~1; //switch OFF digital PIN 0
