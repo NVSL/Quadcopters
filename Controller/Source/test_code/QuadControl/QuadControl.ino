@@ -55,7 +55,7 @@ byte CH_SWAPPED[] = {
 unsigned int ADDR_START = 1337;
 
 
-//Was lazy, copy pasta'd these functions
+//Borrowed these functions from...somewhere
 //This function will write a 2 byte integer to the eeprom at the specified address and address + 1
 void EEPROMWriteInt(int p_address, int p_value)
 {
