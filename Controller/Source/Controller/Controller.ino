@@ -4,7 +4,6 @@
 
 #include "RadioFunctions.h"
 #include <Wire.h>
-#include "LCD_C0220BiZ.h"
 #include <EEPROM.h>
 #include <limits.h>
 
@@ -20,8 +19,7 @@ union {
     uint16_t AUX2;
     uint16_t AUX3;
     uint16_t AUX4;
-  } 
-  m;
+  } m;
   uint16_t rc_channels[8];
   char buff[sizeof(struct stick)];
 } 
@@ -34,8 +32,9 @@ char tmpBuf[32];	  // Just for printing
 //Multiwii rx data
 #define RC_CHANS 8
 int16_t rcData[RC_CHANS];
-int CH_PINS[] = {
-  A0,A1,A2,A3};
+
+int CH_PINS[] = {A0,A1,A4,A5};
+
 unsigned int CH_LOWS[] = {
   0,0,0,0};   //Lowest analogRead value: pushing sticks down or left
 unsigned int CH_HIGHS[] = {
@@ -43,7 +42,7 @@ unsigned int CH_HIGHS[] = {
 byte CH_SWAPPED[] = {
   0,0,1,1};   //Gimbal values are reversed for some reason
 unsigned int ADDR_START = 1337;
-ST7036 lcd = ST7036 ( 2, 20, 0x78 );
+
 
 
 //Was lazy, copy pasta'd these functions
@@ -68,9 +67,9 @@ unsigned int EEPROMReadInt(int p_address)
 
 
 
-int buttonWait(int pin, unsigned int time){
+int buttonWait(int pin, unsigned int time, int high_state = 1){
   unsigned long start=millis();
-  while(digitalRead(pin)){
+  while(digitalRead(pin) == high_state){
     if(millis() - start > time)
       return 1;
   }
@@ -79,11 +78,12 @@ int buttonWait(int pin, unsigned int time){
 
 
 void calibrate(){
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Calibrating");
-  lcd.setCursor(1,0);
-  lcd.print("Hold to finish");  
+  Serial.print("Calibrating");
+  // lcd.clear();
+  // lcd.setCursor(0,0);
+  // lcd.print("Calibrating");
+  // lcd.setCursor(1,0);
+  // lcd.print("Hold to finish");  
   delay(4000);
 
   unsigned long lcdMillis=0;
@@ -102,11 +102,12 @@ void calibrate(){
         CH_HIGHS[i] = val;
     }
 
-    if(buttonWait(7, 2000)){   //Quit if the button gets held down
+    if(buttonWait(7, 2000, 0)){   //Quit if the button gets held down
       //Write the stuff to EEPROM
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Saving...");
+      // lcd.clear();
+      // lcd.setCursor(0,0);
+      // lcd.print("Saving...");
+      Serial.print("Saving...");
       for(i=0;i<4;i++){
         EEPROMWriteInt(ADDR_START + 4*i,CH_LOWS[i]);
         EEPROMWriteInt(ADDR_START + 4*i + 2,CH_HIGHS[i]);
@@ -117,16 +118,20 @@ void calibrate(){
 
     if(millis() - lcdMillis > 500){
       lcdMillis = millis();
-      lcd.clear();
+      // lcd.clear();
       for(i=0;i<4;i++){
-        lcd.setCursor(0,5*i);
-        lcd.print(CH_LOWS[i]);
-        lcd.setCursor(1,5*i);
-        lcd.print(CH_HIGHS[i]);
+        Serial.print(CH_LOWS[i]);
+        Serial.print("    ");
+        Serial.print(CH_HIGHS[i]);
+        Serial.print("    ");
+        // lcd.setCursor(0,5*i);
+        // lcd.print(CH_LOWS[i]);
+        // lcd.setCursor(1,5*i);
+        // lcd.print(CH_HIGHS[i]);
       }
+      Serial.println("");
     }
   }
-
 }
 
 
@@ -134,17 +139,18 @@ void calibrate(){
 //The setup function is called once at startup of the sketch
 void setup()
 {
-
-  lcd.init ();
-  lcd.setContrast(10);  
-  delay(300);
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Don't crash!");
-  delay(5000);
-  lcd.clear();
+  analogReference(DEFAULT);
+  // lcd.init ();
+  // lcd.setContrast(10);  
+  // delay(300);
+  // lcd.clear();
+  // lcd.setCursor(0,0);
+  // lcd.print("Don't crash!");
+  // delay(5000);
+  // lcd.clear();
   pinMode(6, INPUT); 
   pinMode(7,INPUT);
+  Serial.begin(9600);
 
   for(int i=0;i<4;i++){
     CH_LOWS[i] = EEPROMReadInt(ADDR_START + 4*i);
@@ -173,20 +179,23 @@ uint16_t stick_values[8];
 // The loop function is called in an endless loop
 void loop()
 {
+
   if(buttonWait(7,2000))
     calibrate();
 
 
-  if(abs(millis()  - lastMillis) > 150){
+  if(abs(millis()  - lastMillis) > 1000){
     lastMillis = millis();
-    lcd.setCursor(0,0);
-    lcd.print("                    ");
+    // lcd.setCursor(0,0);
+    // lcd.print("                    ");
+    Serial.println("ROLL PITCH YAW THROTTLE");
     for(int i=0;i<4;i++){
-      lcd.setCursor(0,i*5);
-      lcd.print(stick_struct.rc_channels[i]);
+      // lcd.setCursor(0,i*5);
+      // lcd.print(stick_struct.rc_channels[i]);
+      Serial.println(stick_struct.rc_channels[i]);
     }
-    lcd.setCursor(1,0);
-    lcd.print("ROLL PITC YAW  THRO");
+    // lcd.setCursor(1,0);
+    // lcd.print("ROLL PITC YAW  THRO");
   }  
 
 
