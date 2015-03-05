@@ -1,11 +1,10 @@
-/*
-  ATmega128RFA1 Dev Board Basic Chat
- */
+
 
 #include "RadioFunctions.h"
 #include <Wire.h>
 #include <EEPROM.h>
 #include <limits.h>
+#include "serLCD.h"
 
 
 // Joystick values
@@ -33,16 +32,18 @@ char tmpBuf[32];	  // Just for printing
 #define RC_CHANS 8
 int16_t rcData[RC_CHANS];
 
-int CH_PINS[] = {A0,A1,A4,A5};
+//Analog pins corresponding to roll, pitch, yaw, throttle, in that order
+int CH_PINS[] = {A5,A4,A0,A1};
 
-unsigned int CH_LOWS[] = {
-  0,0,0,0};   //Lowest analogRead value: pushing sticks down or left
-unsigned int CH_HIGHS[] = {
-  1023,1023,1023,1023};  //Highest value
-byte CH_SWAPPED[] = {
-  0,0,1,1};   //Gimbal values are reversed for some reason
+unsigned int CH_LOWS[] = {0,0,0,0};   //Lowest analogRead value: pushing sticks down or left
+unsigned int CH_HIGHS[] = {1023,1023,1023,1023};  //Highest value: sticks up/right
+unsigned int CH_CENTERS[] = {500,500,500,500};     //Gimbals are not symmetric sometimes
+
+
+byte CH_SWAPPED[] = {1,1,0,0};   //Gimbal values are reversed, this happens if you've installed it upside-down
 unsigned int ADDR_START = 1337;
 
+serLCD sparkfun_lcd;
 
 
 //Was lazy, copy pasta'd these functions
@@ -79,11 +80,11 @@ int buttonWait(int pin, unsigned int time, int high_state = 1){
 
 void calibrate(){
   Serial.print("Calibrating");
-  // lcd.clear();
-  // lcd.setCursor(0,0);
-  // lcd.print("Calibrating");
-  // lcd.setCursor(1,0);
-  // lcd.print("Hold to finish");  
+  sparkfun_lcd.clear();
+  sparkfun_lcd.setCursor(0,0);
+  sparkfun_lcd.print("Calibrating");
+  sparkfun_lcd.setCursor(1,0);
+  sparkfun_lcd.print("Center sticks");  
   delay(4000);
 
   unsigned long lcdMillis=0;
@@ -91,11 +92,15 @@ void calibrate(){
   for(i=0;i<4;i++){
     CH_LOWS[i]=INT_MAX;
     CH_HIGHS[i]=0;
+    CH_CENTERS[i] = analogRead(CH_PINS[i]);
+    delay(100);
   }
+
 
   while(1){
     for(i=0;i<4;i++){
       val = analogRead(CH_PINS[i]);
+      delay(3);
       if(val < CH_LOWS[i])
         CH_LOWS[i]=val;
       if(val > CH_HIGHS[i])
@@ -104,13 +109,14 @@ void calibrate(){
 
     if(buttonWait(7, 2000, 0)){   //Quit if the button gets held down
       //Write the stuff to EEPROM
-      // lcd.clear();
-      // lcd.setCursor(0,0);
-      // lcd.print("Saving...");
+      sparkfun_lcd.clear();
+      sparkfun_lcd.setCursor(0,0);
+      sparkfun_lcd.print("Saving...");
       Serial.print("Saving...");
       for(i=0;i<4;i++){
-        EEPROMWriteInt(ADDR_START + 4*i,CH_LOWS[i]);
-        EEPROMWriteInt(ADDR_START + 4*i + 2,CH_HIGHS[i]);
+        EEPROMWriteInt(ADDR_START + 6*i,CH_LOWS[i]);
+        EEPROMWriteInt(ADDR_START + 6*i + 2,CH_HIGHS[i]);
+        EEPROMWriteInt(ADDR_START + 6*i + 4,CH_CENTERS[i]);
       }
       delay(2000);
       return;
@@ -118,16 +124,16 @@ void calibrate(){
 
     if(millis() - lcdMillis > 500){
       lcdMillis = millis();
-      // lcd.clear();
+      sparkfun_lcd.clear();
       for(i=0;i<4;i++){
         Serial.print(CH_LOWS[i]);
         Serial.print("    ");
         Serial.print(CH_HIGHS[i]);
         Serial.print("    ");
-        // lcd.setCursor(0,5*i);
-        // lcd.print(CH_LOWS[i]);
-        // lcd.setCursor(1,5*i);
-        // lcd.print(CH_HIGHS[i]);
+        sparkfun_lcd.setCursor(0,4*i);
+        sparkfun_lcd.print(CH_LOWS[i]);
+        sparkfun_lcd.setCursor(1,4*i);
+        sparkfun_lcd.print(CH_HIGHS[i]);
       }
       Serial.println("");
     }
@@ -135,8 +141,6 @@ void calibrate(){
 }
 
 
-
-//The setup function is called once at startup of the sketch
 void setup()
 {
   analogReference(DEFAULT);
@@ -152,9 +156,11 @@ void setup()
   pinMode(7,INPUT);
   Serial.begin(9600);
 
+
   for(int i=0;i<4;i++){
-    CH_LOWS[i] = EEPROMReadInt(ADDR_START + 4*i);
-    CH_HIGHS[i] = EEPROMReadInt(ADDR_START + 4*i+2);
+    CH_LOWS[i] = EEPROMReadInt(ADDR_START + 6*i);
+    CH_HIGHS[i] = EEPROMReadInt(ADDR_START + 6*i + 2);
+    CH_CENTERS[i] = EEPROMReadInt(ADDR_START + 6*i + 4);
   }  
 
   // Add your initialization code here
@@ -171,12 +177,16 @@ void setup()
   stick_struct.m.AUX2 = 1900;
   stick_struct.m.AUX3 = 2000;
   stick_struct.m.AUX4 = 2000;
+  delay(1000);
+  sparkfun_lcd.clear();
+  sparkfun_lcd.print("Hello");
 }
+
 
 unsigned long lastMillis = 0;
 uint16_t stick_values[8];
 
-// The loop function is called in an endless loop
+
 void loop()
 {
 
@@ -184,42 +194,51 @@ void loop()
     calibrate();
 
 
-  if(abs(millis()  - lastMillis) > 1000){
+  if(abs(millis()  - lastMillis) > 500){
     lastMillis = millis();
-    // lcd.setCursor(0,0);
-    // lcd.print("                    ");
-    Serial.println("ROLL PITCH YAW THROTTLE");
+    sparkfun_lcd.setCursor(0,0);
+    // sparkfun_lcd.print("                    ");
+    Serial.println("ROLL\tPITCH\tYAW\tTHROTTLE");
+    sparkfun_lcd.print("ROL PIT YAW THR");
+    sparkfun_lcd.clearLine(1);
     for(int i=0;i<4;i++){
-      // lcd.setCursor(0,i*5);
-      // lcd.print(stick_struct.rc_channels[i]);
-      Serial.println(stick_struct.rc_channels[i]);
+      sparkfun_lcd.setCursor(1,i*4);
+      sparkfun_lcd.print(stick_struct.rc_channels[i]);
+      Serial.print(stick_struct.rc_channels[i]);
+      Serial.print("\t");
     }
+    Serial.println("");
     // lcd.setCursor(1,0);
     // lcd.print("ROLL PITC YAW  THRO");
-  }  
+  }
 
 
   for(int i=0;i<4;i++){
     int val = analogRead(CH_PINS[i]);
-    int low,high;
+    delay(3);   // Let analogRead be dumb
+    int low,high,center;
     if(CH_SWAPPED[i]){
       low = CH_HIGHS[i];
       high = CH_LOWS[i];
-    }
-    else{
+    }else{
       low = CH_LOWS[i];
-      high=CH_HIGHS[i];
+      high = CH_HIGHS[i];
     }
-    val = map(val,low,high,1000,2000);
+
+    center = CH_CENTERS[i];
+
+    if(val < center)
+      val = map(val, low, center, 1000, 1500);
+    else
+      val = map(val, center, high, 1500, 2000);
+
     stick_struct.rc_channels[i] = val;
   }
 
 
-  if(digitalRead(6)){
-    rfPrint("sup");
-  }
-
-  // Get the values from the joysticks ...
+  // if(digitalRead(6)){
+    // rfPrint("sup");
+  // }
 
 
   // Copy the values to transmit buffer
@@ -228,42 +247,6 @@ void loop()
 
   // Send Data in a serial format with null end
   rfPrint(txData, sizeof(stick_struct));
-
-  // Wait, don't send data each loop
-//
-//  if (rfAvailable())  // This is what Im going to receive
-//  {
-    //    strcpy(rxData, rfRead());
-    //
-    //    //Check if at least there is enough data.
-    //    if(strlen(rxData) >= sizeof(stick_struct)) {
-    //
-    //      // Pass data to multiwii motors array
-    //      memcpy(rcData, rxData, sizeof(stick_struct));
-    //
-    //      // Print received data
-    //      sprintf(tmpBuf, "ROLL = %i \n\r", rcData[0]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "PTICH = %i \n\r", rcData[1]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "YAW = %i \n\r", rcData[2]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "THROTTLE = %i \n\r", rcData[3]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "AUX1 = %i \n\r", rcData[4]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "AUX2 = %i \n\r", rcData[5]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "AUX3 = %i \n\r", rcData[6]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //      sprintf(tmpBuf, "AUX4 = %i \n\r", rcData[7]);
-    //      Serial.print(tmpBuf);  // ... send it out serial.
-    //    } 
-    //    else {
-    //      Serial.print("Error data size is incorrect \n\r");
-    //    }
-//  }
-
 
 }
 
