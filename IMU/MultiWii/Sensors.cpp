@@ -28,10 +28,10 @@ void ACC_init();
 // ************************************************************************************************************
 //default board orientation
 #if !defined(ACC_ORIENTATION) 
-  #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = X; imu.accADC[PITCH]  = Y; imu.accADC[YAW]  = Z;}
+  #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = -X; imu.accADC[PITCH]  = Y; imu.accADC[YAW]  = Z;}
 #endif
 #if !defined(GYRO_ORIENTATION) 
-  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[PITCH] = -X; imu.gyroADC[ROLL] = -Y; imu.gyroADC[YAW] = Z;}
+  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[PITCH] = -X; imu.gyroADC[ROLL] = Y; imu.gyroADC[YAW] = Z;}
 #endif
 #if !defined(MAG_ORIENTATION) 
   #define MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  = X; imu.magADC[PITCH]  = Y; imu.magADC[YAW]  = Z;}
