@@ -1044,9 +1044,18 @@ void mixTable() {
     motor[2] = PIDMIX(+1, 0,+1); //LEFT
     motor[3] = PIDMIX( 0,-1,-1); //FRONT
   #elif defined( QUADX )
-    motor[0] = PIDMIX(-1,+1,-1); //REAR_R
-    motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
-    motor[2] = PIDMIX(+1,+1,+1); //REAR_L
+/*
+We have it defined now as :
+0: REAR_R
+1: REAR_L
+2: FRONT_R
+3: FRONT_L
+
+*/
+
+    motor[0] = PIDMIX(-1,+1,-1); //REAR_R       
+    motor[2] = PIDMIX(-1,-1,+1); //FRONT_R
+    motor[1] = PIDMIX(+1,+1,+1); //REAR_L
     motor[3] = PIDMIX(+1,-1,-1); //FRONT_L
   #elif defined( Y4 )
     motor[0] = PIDMIX(+0,+1,-1);   //REAR_1 CW
