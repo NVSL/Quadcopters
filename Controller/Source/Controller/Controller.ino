@@ -114,6 +114,12 @@ void calibrate(){
       sparkfun_lcd.print("Saving...");
       Serial.print("Saving...");
       for(i=0;i<4;i++){
+        Serial.println("LOW\tCENTER\tHIGH");
+        Serial.print(CH_LOWS[i]);
+        Serial.print("\t");
+        Serial.print(CH_CENTERS[i]);
+        Serial.print("\t");
+        Serial.println(CH_HIGHS[i]);
         EEPROMWriteInt(ADDR_START + 6*i,CH_LOWS[i]);
         EEPROMWriteInt(ADDR_START + 6*i + 2,CH_HIGHS[i]);
         EEPROMWriteInt(ADDR_START + 6*i + 4,CH_CENTERS[i]);
