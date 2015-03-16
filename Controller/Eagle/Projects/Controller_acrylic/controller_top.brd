@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.5" altunitdist="mm" altunit="mm"/>
+<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.001" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -135,6 +135,15 @@
 <layer number="222" name="222bmp" color="7" fill="1" visible="no" active="yes"/>
 <layer number="223" name="223bmp" color="7" fill="1" visible="no" active="yes"/>
 <layer number="224" name="224bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="225" name="225bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="226" name="226bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="227" name="227bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="228" name="228bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="229" name="229bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="230" name="230bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="231" name="231bmp" color="7" fill="1" visible="no" active="yes"/>
+<layer number="232" name="Eagle3D_PG2" color="7" fill="1" visible="no" active="no"/>
+<layer number="233" name="Eagle3D_PG3" color="7" fill="1" visible="no" active="no"/>
 <layer number="248" name="Housing" color="7" fill="1" visible="no" active="yes"/>
 <layer number="249" name="Edge" color="7" fill="1" visible="no" active="yes"/>
 <layer number="250" name="Descript" color="7" fill="1" visible="no" active="yes"/>
@@ -673,15 +682,50 @@ Author: Dustin Richmond &lt;darichmond, drichmond@eng.ucsd.edu&gt; (Initial: 10/
 Reviewer 1: 
 Reviewer 2:</description>
 <packages>
+<package name="GIMBAL_FOOTPRINT">
+<description>This is the mounting footprint for the 9XR Replacement Gimbal. It requires a separate pinout to be placed to measure the gimbal.
+ You can see the analog transmitter here: http://www.hobbyking.com/hobbyking/store/__39505__Transmitter_Gimbal_Set_Left_Turnigy_9XR_Transmitter_Mode_1.html
+ The black wire is VDD, the White wire is Ground, the Red wire is Analog Out 
+Author: Dustin Richmond 
+Created: 10/25/2014</description>
+<circle x="0" y="0" radius="23.67" width="0.1" layer="48"/>
+<hole x="-23.5" y="22.95" drill="2.8"/>
+<hole x="-23.5" y="-22.95" drill="2.8"/>
+<hole x="23.5" y="-22.95" drill="2.8"/>
+<hole x="23.5" y="22.95" drill="2.8"/>
+<circle x="0" y="0" radius="23.8" width="0.05" layer="20"/>
+</package>
+<package name="SPARKFUN_LCD_33">
+<wire x1="0" y1="0" x2="80" y2="0" width="0.001" layer="21"/>
+<wire x1="80" y1="0" x2="80" y2="36" width="0.001" layer="21"/>
+<wire x1="80" y1="36" x2="0" y2="36" width="0.001" layer="21"/>
+<wire x1="0" y1="36" x2="0" y2="0" width="0.001" layer="21"/>
+<wire x1="4.54" y1="4.26" x2="75.99" y2="4.26" width="0.001" layer="20"/>
+<wire x1="4.54" y1="31.288" x2="4.54" y2="4.26" width="0.001" layer="20"/>
+<wire x1="80" y1="11" x2="80" y2="22.976" width="0.001" layer="20"/>
+<wire x1="80" y1="22.976" x2="75.995" y2="22.976" width="0.001" layer="20"/>
+<wire x1="80" y1="11" x2="75.99" y2="11" width="0.001" layer="20"/>
+<wire x1="75.99" y1="11" x2="75.99" y2="4.26" width="0.001" layer="20"/>
+<wire x1="75.995" y1="22.977" x2="75.995" y2="31.288" width="0.001" layer="20"/>
+<hole x="77.5" y="2.5" drill="2.8"/>
+<hole x="77.5" y="33.5" drill="2.8"/>
+<hole x="2.5" y="2.5" drill="2.8"/>
+<hole x="2.5" y="33.5" drill="2.8"/>
+<wire x1="4.54" y1="31.288" x2="6" y2="31.288" width="0.001" layer="20"/>
+<wire x1="6" y1="31.288" x2="6" y2="36" width="0.001" layer="20"/>
+<wire x1="6" y1="36" x2="52" y2="36" width="0.001" layer="20"/>
+<wire x1="52" y1="36" x2="52" y2="31.288" width="0.001" layer="20"/>
+<wire x1="52" y1="31.288" x2="75.995" y2="31.288" width="0.001" layer="20"/>
+</package>
 <package name="CONTROLLER_OUTLINE">
 <wire x1="0" y1="0" x2="250" y2="0" width="0" layer="20"/>
 <wire x1="250" y1="115" x2="0" y2="115" width="0" layer="20"/>
 <wire x1="0" y1="0" x2="0" y2="115" width="0.01" layer="20" curve="-60"/>
 <wire x1="250" y1="115" x2="250" y2="0" width="0.01" layer="20" curve="-60"/>
-<hole x="2" y="3.5" drill="2.8"/>
-<hole x="248" y="3.5" drill="2.8"/>
-<hole x="248" y="111.5" drill="2.8"/>
-<hole x="2" y="111.5" drill="2.8"/>
+<hole x="3.27" y="4.77" drill="2.8"/>
+<hole x="246.73" y="4.77" drill="2.8"/>
+<hole x="246.095" y="110.865" drill="2.8"/>
+<hole x="3.27" y="110.23" drill="2.8"/>
 </package>
 </packages>
 </library>
@@ -694,7 +738,7 @@ Reviewer 2:</description>
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules name="4pcb-33board">
+<designrules name="4pcb-33board *">
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
@@ -727,7 +771,7 @@ design rules under a new name.</description>
 <param name="mdDrill" value="10mil"/>
 <param name="mdSmdStop" value="0mil"/>
 <param name="msWidth" value="10mil"/>
-<param name="msDrill" value="15mil"/>
+<param name="msDrill" value="0.9mm"/>
 <param name="msMicroVia" value="9.98981875mm"/>
 <param name="msBlindViaRatio" value="0.5"/>
 <param name="rvPadTop" value="0.25"/>
@@ -874,7 +918,10 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="U$3" library="BOBs" package="ATMEGA128RFA1" value="" x="126" y="114" rot="R270"/>
+<element name="U$3" library="BOBs" package="ATMEGA128RFA1" value="" x="170" y="114" rot="MR270"/>
+<element name="U$1" library="Controller" package="GIMBAL_FOOTPRINT" value="" x="29" y="72.5"/>
+<element name="U$2" library="Controller" package="GIMBAL_FOOTPRINT" value="" x="221" y="72.5"/>
+<element name="U$4" library="Controller" package="SPARKFUN_LCD_33" value="" x="82.938" y="2.814"/>
 <element name="U$5" library="Controller" package="CONTROLLER_OUTLINE" value="" x="0" y="0"/>
 </elements>
 <signals>
