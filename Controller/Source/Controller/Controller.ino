@@ -18,7 +18,8 @@ union {
     uint16_t AUX2;
     uint16_t AUX3;
     uint16_t AUX4;
-  } m;
+  } 
+  m;
   uint16_t rc_channels[8];
   char buff[sizeof(struct stick)];
 } 
@@ -33,14 +34,26 @@ char tmpBuf[32];	  // Just for printing
 int16_t rcData[RC_CHANS];
 
 //Analog pins corresponding to roll, pitch, yaw, throttle, in that order
-int CH_PINS[] = {A5,A4,A0,A1};
+int CH_PINS[] = {
+  A5,A4,A0,A1};
 
-unsigned int CH_LOWS[] = {0,0,0,0};   //Lowest analogRead value: pushing sticks down or left
-unsigned int CH_HIGHS[] = {1023,1023,1023,1023};  //Highest value: sticks up/right
-unsigned int CH_CENTERS[] = {500,500,500,500};     //Gimbals are not symmetric sometimes
+//Less than this far away from center, and it's considered center
+//In "RC" units
+#define DEAD_ZONE 30  
+
+unsigned int CH_LOWS[] = {
+  0,0,0,0};   //Lowest analogRead value: pushing sticks down or left
+unsigned int CH_HIGHS[] = {
+  1023,1023,1023,1023};  //Highest value: sticks up/right
+unsigned int CH_CENTERS[] = {
+  500,500,500,500};     //Gimbals are not symmetric sometimes
+float LOW_PASS[] = {
+  0.0, 0.0, 0.0, 0.0};           //Low pass of the values before we send anything
 
 
-byte CH_SWAPPED[] = {1,1,0,0};   //Gimbal values are reversed, this happens if you've installed it upside-down
+
+byte CH_SWAPPED[] = {
+  1,1,0,0};   //Gimbal values are reversed, this happens if you've installed it upside-down
 unsigned int ADDR_START = 1337;
 
 serLCD sparkfun_lcd;
@@ -161,6 +174,7 @@ void setup()
   pinMode(6, INPUT); 
   pinMode(7,INPUT);
   Serial.begin(9600);
+  Serial1.begin(9600);
 
 
   for(int i=0;i<4;i++){
@@ -168,10 +182,23 @@ void setup()
     CH_HIGHS[i] = EEPROMReadInt(ADDR_START + 6*i + 2);
     CH_CENTERS[i] = EEPROMReadInt(ADDR_START + 6*i + 4);
   }  
+  
+
+  for(int i=0;i<4;i++){
+    Serial.print("CH_LOWS\tCH_HIGHS\tCH_CENTERS\t");
+    Serial.print(i);
+    Serial.println("");
+
+    Serial.print(CH_LOWS[i]);
+    Serial.print("\t");
+    Serial.print(CH_HIGHS[i]);
+    Serial.print("\t");
+    Serial.print(CH_CENTERS[i]);
+    Serial.println("");
+
+  }
 
   // Add your initialization code here
-  Serial.begin(9600);  // Start up serial
-  Serial1.begin(9600); // Start up serial1 -- used for debug.
   rfBegin(21);  // Initialize ATmega128RFA1 radio on channel 11 (can be 11-26)
 
   //Initialize values with some data
@@ -200,7 +227,7 @@ void loop()
     calibrate();
 
 
-  if(abs(millis()  - lastMillis) > 500){
+  if(abs(millis()  - lastMillis) > 300){
     lastMillis = millis();
     sparkfun_lcd.setCursor(0,0);
     // sparkfun_lcd.print("                    ");
@@ -222,29 +249,28 @@ void loop()
   for(int i=0;i<4;i++){
     int val = analogRead(CH_PINS[i]);
     delay(3);   // Let analogRead be dumb
-    int low,high,center;
-    if(CH_SWAPPED[i]){
-      low = CH_HIGHS[i];
-      high = CH_LOWS[i];
-    }else{
-      low = CH_LOWS[i];
-      high = CH_HIGHS[i];
-    }
+//
+//    Serial.print("val[");
+//    Serial.print(i);
+//    Serial.print("] = ");
+//    Serial.print(val);
+//    Serial.print("\t");
 
-    center = CH_CENTERS[i];
-
-    if(val < center)
-      val = map(val, low, center, 1000, 1500);
+    if(val < CH_CENTERS[i])
+      val = map(val, CH_LOWS[i], CH_CENTERS[i], 0, 499);
     else
-      val = map(val, center, high, 1500, 2000);
+      val = map(val, CH_CENTERS[i], CH_HIGHS[i], 500, 1000);
+      
+    if(CH_SWAPPED[i])
+      val = 1000 - val;
+    
+    val += 1000;
+    if(val < 1500 + DEAD_ZONE && val > 1500 - DEAD_ZONE)
+      val = 1500;
 
     stick_struct.rc_channels[i] = val;
   }
-
-
-  // if(digitalRead(6)){
-    // rfPrint("sup");
-  // }
+//  Serial.println("");
 
 
   // Copy the values to transmit buffer
@@ -255,6 +281,8 @@ void loop()
   rfPrint(txData, sizeof(stick_struct));
 
 }
+
+
 
 
 
