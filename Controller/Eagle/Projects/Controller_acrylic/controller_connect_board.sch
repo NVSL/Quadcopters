@@ -217,10 +217,10 @@ The radius of the faceplate opening is 0.5mm larger than it "should" be to allow
 &lt;br&gt;
 
 The size of the faceplate opening is 0.5mm larger than it "should" be to allow for small misalignments between the faceplace and board.</description>
-<pad name="P" x="-6" y="2.5" drill="1.3" shape="square"/>
-<pad name="S" x="-6" y="-2.5" drill="1.3"/>
-<pad name="S2" x="6" y="-2.5" drill="1.3"/>
-<pad name="P2" x="6" y="2.5" drill="1.3"/>
+<pad name="P" x="-6" y="2.5" drill="1.4" shape="square"/>
+<pad name="S" x="-6" y="-2.5" drill="1.4"/>
+<pad name="S2" x="6" y="-2.5" drill="1.4"/>
+<pad name="P2" x="6" y="2.5" drill="1.4"/>
 <hole x="0" y="4.5" drill="1.4"/>
 <hole x="0" y="-4.5" drill="1.4"/>
 <rectangle x1="-7.5" y1="-7" x2="7.5" y2="7" layer="39"/>
