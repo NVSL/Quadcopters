@@ -109,6 +109,11 @@
 <layer number="155" name="FabDoc3" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="160" name="tMountFaceplate" color="11" fill="1" visible="no" active="yes"/>
 <layer number="161" name="bMountFaceplate" color="11" fill="1" visible="no" active="yes"/>
+<layer number="162" name="tCopperArt" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="163" name="bCopperArt" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="164" name="tRubout" color="13" fill="11" visible="yes" active="yes"/>
+<layer number="165" name="bRubout" color="3" fill="5" visible="yes" active="yes"/>
+<layer number="167" name="Fiducials" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="199" name="Contour" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="200" name="200bmp" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="201" name="201bmp" color="7" fill="1" visible="yes" active="yes"/>
@@ -142,6 +147,8 @@
 <layer number="229" name="229bmp" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="230" name="230bmp" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="231" name="231bmp" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="232" name="Eagle3D_PG2" color="7" fill="1" visible="no" active="no"/>
+<layer number="233" name="Eagle3D_PG3" color="7" fill="1" visible="no" active="no"/>
 <layer number="248" name="Housing" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="249" name="Edge" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="250" name="Descript" color="7" fill="1" visible="yes" active="yes"/>
@@ -157,6 +164,23 @@ Author: Dustin Richmond &lt;darichmond, drichmond@eng.ucsd.edu&gt; (Initial: 10/
 Reviewer 1: 
 Reviewer 2:</description>
 <packages>
+<package name="JST-3-PTH-REVERSE">
+<wire x1="-3.95" y1="-1.6" x2="-3.95" y2="6" width="0.2032" layer="21"/>
+<wire x1="-3.95" y1="6" x2="3.95" y2="6" width="0.2032" layer="21"/>
+<wire x1="3.95" y1="6" x2="3.95" y2="-1.6" width="0.2032" layer="21"/>
+<wire x1="-3.95" y1="-1.6" x2="-3.3" y2="-1.6" width="0.2032" layer="21"/>
+<wire x1="3.95" y1="-1.6" x2="3.3" y2="-1.6" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-1.6" x2="-3.3" y2="0" width="0.2032" layer="21"/>
+<wire x1="3.3" y1="-1.6" x2="3.3" y2="0" width="0.2032" layer="21"/>
+<pad name="1" x="-2" y="0" drill="0.7" diameter="1.6"/>
+<pad name="2" x="0" y="0" drill="0.7" diameter="1.6"/>
+<pad name="3" x="2" y="0" drill="0.7" diameter="1.6"/>
+<text x="-1.27" y="5.24" size="0.4064" layer="25">&gt;Name</text>
+<text x="-1.27" y="3.97" size="0.4064" layer="27">&gt;Value</text>
+<text x="-0.8506" y="0.8732" size="1.27" layer="51">+</text>
+<text x="-2.8384" y="0.797" size="1.27" layer="51">-</text>
+<text x="1.6238" y="1.0732" size="0.8" layer="51">S</text>
+</package>
 <package name="JST-3-PTH">
 <wire x1="-3.95" y1="-1.6" x2="-3.95" y2="6" width="0.2032" layer="21"/>
 <wire x1="-3.95" y1="6" x2="3.95" y2="6" width="0.2032" layer="21"/>
@@ -195,6 +219,23 @@ Created: 10/25/2014</description>
 </symbol>
 </symbols>
 <devicesets>
+<deviceset name="JST_3PIN_GND_VDD_SIG">
+<gates>
+<gate name="G$1" symbol="GIMBAL_3PIN" x="-2.54" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="JST-3-PTH-REVERSE">
+<connects>
+<connect gate="G$1" pin="AOUT" pad="3"/>
+<connect gate="G$1" pin="GND" pad="1"/>
+<connect gate="G$1" pin="VDD" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="GIMBAL_3PIN_MATCH_TDOCU">
 <gates>
 <gate name="G$1" symbol="GIMBAL_3PIN" x="-2.54" y="-5.08"/>
@@ -2213,14 +2254,14 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </class>
 </classes>
 <parts>
-<part name="J1" library="Controller" deviceset="GIMBAL_3PIN_MATCH_TDOCU" device=""/>
-<part name="J2" library="Controller" deviceset="GIMBAL_3PIN_MATCH_TDOCU" device=""/>
-<part name="J3" library="Controller" deviceset="GIMBAL_3PIN_MATCH_TDOCU" device=""/>
-<part name="J4" library="Controller" deviceset="GIMBAL_3PIN_MATCH_TDOCU" device=""/>
-<part name="R1" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/6W" value="5k"/>
-<part name="R2" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/6W" value="5k"/>
-<part name="R3" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/6W" value="5k"/>
-<part name="R4" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/6W" value="5k"/>
+<part name="J1" library="Controller" deviceset="JST_3PIN_GND_VDD_SIG" device=""/>
+<part name="J2" library="Controller" deviceset="JST_3PIN_GND_VDD_SIG" device=""/>
+<part name="J3" library="Controller" deviceset="JST_3PIN_GND_VDD_SIG" device=""/>
+<part name="J4" library="Controller" deviceset="JST_3PIN_GND_VDD_SIG" device=""/>
+<part name="R1" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="5k"/>
+<part name="R2" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="5k"/>
+<part name="R3" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="5k"/>
+<part name="R4" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="5k"/>
 <part name="JP6" library="SparkFun-Connectors" deviceset="M04" device="PTH"/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="M02" device="1X02_NO_SILK"/>
 <part name="J5" library="Controller" deviceset="GIMBAL_3PIN_MATCH_TDOCU" device=""/>
@@ -2325,39 +2366,43 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <junction x="60.96" y="78.74"/>
 </segment>
 </net>
-<net name="N$5" class="0">
+<net name="PITCH" class="0">
 <segment>
 <pinref part="J1" gate="G$1" pin="AOUT"/>
 <wire x1="38.1" y1="66.04" x2="99.06" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="JP6" gate="G$1" pin="1"/>
 <wire x1="99.06" y1="66.04" x2="99.06" y2="45.72" width="0.1524" layer="91"/>
+<label x="71.12" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$6" class="0">
+<net name="ROLL" class="0">
 <segment>
 <pinref part="J2" gate="G$1" pin="AOUT"/>
 <wire x1="86.36" y1="48.26" x2="38.1" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="48.26" x2="86.36" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="JP6" gate="G$1" pin="2"/>
 <wire x1="86.36" y1="43.18" x2="99.06" y2="43.18" width="0.1524" layer="91"/>
+<label x="71.12" y="48.26" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$7" class="0">
+<net name="THROTTLE" class="0">
 <segment>
 <pinref part="J3" gate="G$1" pin="AOUT"/>
 <wire x1="38.1" y1="27.94" x2="86.36" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="27.94" x2="86.36" y2="40.64" width="0.1524" layer="91"/>
 <pinref part="JP6" gate="G$1" pin="3"/>
 <wire x1="86.36" y1="40.64" x2="99.06" y2="40.64" width="0.1524" layer="91"/>
+<label x="68.58" y="27.94" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$8" class="0">
+<net name="YAW" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="AOUT"/>
 <wire x1="93.98" y1="12.7" x2="38.1" y2="12.7" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="12.7" x2="93.98" y2="38.1" width="0.1524" layer="91"/>
 <pinref part="JP6" gate="G$1" pin="4"/>
 <wire x1="93.98" y1="38.1" x2="99.06" y2="38.1" width="0.1524" layer="91"/>
+<label x="71.12" y="12.7" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$9" class="0">

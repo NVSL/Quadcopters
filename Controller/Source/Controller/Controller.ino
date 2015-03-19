@@ -35,7 +35,7 @@ int16_t rcData[RC_CHANS];
 
 //Analog pins corresponding to roll, pitch, yaw, throttle, in that order
 int CH_PINS[] = {
-  A5,A4,A0,A1};
+  A3,A2,A0,A1};
 
 //Less than this far away from center, and it's considered center
 //In "RC" units
