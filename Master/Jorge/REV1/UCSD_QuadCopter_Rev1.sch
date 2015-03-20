@@ -12642,6 +12642,9 @@ www.SparkFun.com SKU : Comp-SMDS</description>
 <smd name="3" x="1.0922" y="0" dx="1.3208" dy="0.5588" layer="1"/>
 <text x="-3.4544" y="2.54" size="2.0828" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-3.4544" y="-4.445" size="2.0828" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
+<rectangle x1="0.127" y1="-1.397" x2="1.778" y2="1.27" layer="1"/>
+<rectangle x1="-1.778" y1="0.127" x2="-0.254" y2="1.27" layer="1"/>
+<rectangle x1="-1.778" y1="-1.397" x2="-0.254" y2="-0.254" layer="1"/>
 </package>
 <package name="SOD323_ST">
 <description>&lt;b&gt;SOD-323&lt;/b&gt;&lt;p&gt;
@@ -13239,10 +13242,10 @@ Source:  Vishay Semiconductor, BAS16WS.pdf</description>
 <part name="SUPPLY7" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY8" library="supply2" deviceset="GND" device=""/>
 <part name="U2" library="Power" deviceset="TPS73633-DBVT" device=""/>
-<part name="C10" library="resistor" deviceset="C-US" device="C0805" value="1uF"/>
+<part name="C10" library="resistor" deviceset="C-US" device="C0805" value="200uF"/>
 <part name="SUPPLY2" library="supply2" deviceset="GND" device=""/>
 <part name="C12" library="resistor" deviceset="C-US" device="C0805" value="10nF"/>
-<part name="C23" library="resistor" deviceset="C-US" device="C0805" value="1uF"/>
+<part name="C23" library="resistor" deviceset="C-US" device="C0805" value="100uF"/>
 <part name="SUPPLY3" library="supply2" deviceset="GND" device=""/>
 <part name="R2" library="resistor" deviceset="R-US_" device="R0805" value="330"/>
 <part name="PWR" library="led" deviceset="LED" device="CHIP-LED0805" value="RED"/>
@@ -13326,10 +13329,7 @@ N-Channnel Transistors
 
 </text>
 <text x="45.974" y="135.128" size="3.81" layer="97">TODO</text>
-<text x="43.434" y="105.918" size="2.54" layer="97">- Change Package info in Schematic
-for motor mosfets and diodes.
--Change Boom to 805 components
--Increase pcb motor arms. 
+<text x="43.434" y="105.918" size="2.54" layer="97">
  
 
 </text>

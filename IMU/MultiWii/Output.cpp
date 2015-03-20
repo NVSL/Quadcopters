@@ -17,7 +17,7 @@ void initializeServo();
 // since we are uing the PWM generation in a direct way, the pin order is just to inizialie the right pins 
 // its not possible to change a PWM output pin just by changing the order
 #if defined(PROMINI)
-  uint8_t PWM_PIN[8] = {8,9,3,4,6,5,A2,12};   //for a quad+: rear,right,left,front
+  uint8_t PWM_PIN[8] = {8,3,9,4,6,5,A2,12};   //for a quad+: rear,right,left,front
 #endif
 #if defined(PROMICRO)
   #if !defined(HWPWM6)
@@ -383,14 +383,16 @@ void writeMotors() { // [1000;2000] => [125;250]
     #endif
     #if (NUMBER_MOTOR > 1)
       #ifndef EXT_MOTOR_RANGE
-        OCR2A = (motor[1] - 1000)>>2; //  pin 9
+        //OCR2A = (motor[1] - 1000)>>2; //  pin 9
+        OCR3A = (motor[1] - 1000)>>2; //  pin 3
       #else
         OCR1B = ((motor[1]>>2) - 250);
       #endif
     #endif
     #if (NUMBER_MOTOR > 2)
       #ifndef EXT_MOTOR_RANGE
-        OCR3A = (motor[2] - 1000)>>2; //  pin 3
+        //OCR3A = (motor[2] - 1000)>>2; //  pin 3
+        OCR2A = (motor[2] - 1000)>>2; //  pin 9
       #else
         OCR2A = ((motor[2]>>2) - 250);
       #endif
@@ -436,7 +438,6 @@ void writeAllMotors(int16_t mc) {   // Sends commands to all motors
   for (uint8_t i =0;i<NUMBER_MOTOR;i++) {
     motor[i]=mc;
   }
-  writeMotors();
 }
 
 /**************************************************************************************/
@@ -1044,18 +1045,9 @@ void mixTable() {
     motor[2] = PIDMIX(+1, 0,+1); //LEFT
     motor[3] = PIDMIX( 0,-1,-1); //FRONT
   #elif defined( QUADX )
-/*
-We have it defined now as :
-0: REAR_R
-1: REAR_L
-2: FRONT_R
-3: FRONT_L
-
-*/
-
-    motor[0] = PIDMIX(-1,+1,-1); //REAR_R       
-    motor[2] = PIDMIX(-1,-1,+1); //FRONT_R
-    motor[1] = PIDMIX(+1,+1,+1); //REAR_L
+    motor[0] = PIDMIX(-1,+1,-1); //REAR_R
+    motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
+    motor[2] = PIDMIX(+1,+1,+1); //REAR_L
     motor[3] = PIDMIX(+1,-1,-1); //FRONT_L
   #elif defined( Y4 )
     motor[0] = PIDMIX(+0,+1,-1);   //REAR_1 CW
