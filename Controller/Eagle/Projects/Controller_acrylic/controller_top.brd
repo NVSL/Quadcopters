@@ -919,8 +919,8 @@ design rules under a new name.</description>
 </autorouter>
 <elements>
 <element name="U$3" library="BOBs" package="ATMEGA128RFA1" value="" x="170" y="114" rot="MR270"/>
-<element name="U$1" library="Controller" package="GIMBAL_FOOTPRINT" value="" x="29" y="72.5"/>
-<element name="U$2" library="Controller" package="GIMBAL_FOOTPRINT" value="" x="221" y="72.5"/>
+<element name="U$1" library="Controller" package="GIMBAL_FOOTPRINT" value="" x="24" y="72.5"/>
+<element name="U$2" library="Controller" package="GIMBAL_FOOTPRINT" value="" x="226" y="72.5"/>
 <element name="U$4" library="Controller" package="SPARKFUN_LCD_33" value="" x="82.938" y="2.814"/>
 <element name="U$5" library="Controller" package="CONTROLLER_OUTLINE" value="" x="0" y="0"/>
 </elements>
