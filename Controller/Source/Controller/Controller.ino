@@ -35,7 +35,7 @@ int16_t rcData[RC_CHANS];
 
 //Analog pins corresponding to roll, pitch, yaw, throttle, in that order
 int CH_PINS[] = {
-  A3,A2,A0,A1};
+  A3,A4,A1,A2};
 
 //Less than this far away from center, and it's considered center
 //In "RC" units
@@ -47,13 +47,10 @@ unsigned int CH_HIGHS[] = {
   1023,1023,1023,1023};  //Highest value: sticks up/right
 unsigned int CH_CENTERS[] = {
   500,500,500,500};     //Gimbals are not symmetric sometimes
-float LOW_PASS[] = {
-  0.0, 0.0, 0.0, 0.0};           //Low pass of the values before we send anything
-
 
 
 byte CH_SWAPPED[] = {
-  1,1,0,0};   //Gimbal values are reversed, this happens if you've installed it upside-down
+  1,1,1,1};   //Gimbal values are reversed, this happens if you've installed it upside-down
 unsigned int ADDR_START = 1337;
 
 serLCD sparkfun_lcd;
@@ -120,7 +117,7 @@ void calibrate(){
         CH_HIGHS[i] = val;
     }
 
-    if(buttonWait(7, 2000, 0)){   //Quit if the button gets held down
+    if(buttonWait(7, 2000, 1)){   //Quit if the button gets held down
       //Write the stuff to EEPROM
       sparkfun_lcd.clear();
       sparkfun_lcd.setCursor(0,0);
