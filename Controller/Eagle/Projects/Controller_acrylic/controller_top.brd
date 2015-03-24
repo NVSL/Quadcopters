@@ -30,7 +30,7 @@
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
@@ -152,12 +152,6 @@
 </layers>
 <board>
 <plain>
-<dimension x1="30" y1="57.5" x2="0" y2="57.5" x3="15" y3="45.2" textsize="1.778" layer="47" visible="yes"/>
-<dimension x1="30" y1="57.5" x2="30" y2="0" x3="38.35" y3="28.75" textsize="1.778" layer="47" dtype="horizontal" visible="yes"/>
-<dimension x1="30" y1="57.5" x2="6" y2="57.45" x3="18" y3="57.5" textsize="1.778" layer="47" dtype="horizontal" visible="yes"/>
-<dimension x1="220" y1="57.5" x2="244" y2="57.95" x3="232" y3="57.5" textsize="1.778" layer="47" dtype="horizontal" visible="yes"/>
-<dimension x1="220" y1="57.5" x2="220" y2="0" x3="206.3" y3="28.75" textsize="1.778" layer="47" visible="yes"/>
-<dimension x1="220" y1="57.5" x2="250" y2="61.6" x3="235" y3="62.85" textsize="1.778" layer="47" dtype="horizontal" visible="yes"/>
 </plain>
 <libraries>
 <library name="BOBs">
