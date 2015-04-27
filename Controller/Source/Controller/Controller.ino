@@ -35,7 +35,7 @@ int16_t rcData[RC_CHANS];
 
 //Analog pins corresponding to roll, pitch, yaw, throttle, in that order
 int CH_PINS[] = {
-  A3,A4,A1,A2};
+  3,4,1,2};
 
 //Less than this far away from center, and it's considered center
 //In "RC" units
@@ -160,14 +160,6 @@ void calibrate(){
 void setup()
 {
   analogReference(DEFAULT);
-  // lcd.init ();
-  // lcd.setContrast(10);  
-  // delay(300);
-  // lcd.clear();
-  // lcd.setCursor(0,0);
-  // lcd.print("Don't crash!");
-  // delay(5000);
-  // lcd.clear();
   pinMode(6, INPUT); 
   pinMode(7,INPUT);
   Serial.begin(9600);
@@ -224,10 +216,9 @@ void loop()
     calibrate();
 
 
-  if(abs(millis()  - lastMillis) > 300){
+  if(abs(millis()  - lastMillis) > 200){
     lastMillis = millis();
     sparkfun_lcd.setCursor(0,0);
-    // sparkfun_lcd.print("                    ");
     Serial.println("ROLL\tPITCH\tYAW\tTHROTTLE");
     sparkfun_lcd.print("ROL PIT YAW THR");
     sparkfun_lcd.clearLine(1);
@@ -238,21 +229,13 @@ void loop()
       Serial.print("\t");
     }
     Serial.println("");
-    // lcd.setCursor(1,0);
-    // lcd.print("ROLL PITC YAW  THRO");
   }
 
 
   for(int i=0;i<4;i++){
     int val = analogRead(CH_PINS[i]);
     delay(3);   // Let analogRead be dumb
-//
-//    Serial.print("val[");
-//    Serial.print(i);
-//    Serial.print("] = ");
-//    Serial.print(val);
-//    Serial.print("\t");
-
+    
     if(val < CH_CENTERS[i])
       val = map(val, CH_LOWS[i], CH_CENTERS[i], 0, 499);
     else
@@ -267,7 +250,6 @@ void loop()
 
     stick_struct.rc_channels[i] = val;
   }
-//  Serial.println("");
 
 
   // Copy the values to transmit buffer
@@ -276,6 +258,8 @@ void loop()
 
   // Send Data in a serial format with null end
   rfPrint(txData, sizeof(stick_struct));
+  
+  delay(180);
 
 }
 
